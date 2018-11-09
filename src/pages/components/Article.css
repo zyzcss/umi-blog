@@ -1,0 +1,104 @@
+.container{
+    width: 100%;
+    background: #fff;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.6);
+    margin-bottom: 50px;
+    padding: 10px 35px;
+}
+.container a{
+    color: black;
+}
+.container > .title{
+    display: inline-block;
+    font-size: 20px;
+    margin: 1.2rem 0;
+    font-weight: bold;
+}
+.container .corver{
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+    margin-bottom: 1.2rem;
+}
+.container > .describe{
+    margin-bottom: 1.2rem;
+}
+.container > .describe p,
+.container > .describe h1,
+.container > .describe h2,
+.container > .describe h3,
+.container > .describe h4,
+.container > .describe h5,
+.container > .describe table,
+.container > .describe pre {
+  margin: 10px 0;
+  line-height: 1.5;
+}
+.container > .describe ul,
+.container > .describe ol {
+  margin: 10px 0 10px 20px;
+}
+.container > .describe blockquote {
+  display: block;
+  border-left: 8px solid #d0e5f2;
+  padding: 5px 10px;
+  margin: 10px 0;
+  line-height: 1.4;
+  font-size: 100%;
+  background-color: #f1f1f1;
+}
+.container > .describe code {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  background-color: #f1f1f1;
+  border-radius: 3px;
+  padding: 3px 5px;
+  margin: 0 3px;
+}
+.container > .describe pre code {
+  display: block;
+}
+.container > .describe table {
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+}
+.container > .describe table td,
+.container > .describe table th {
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  padding: 3px 5px;
+}
+.container > .describe table th {
+  border-bottom: 2px solid #ccc;
+  text-align: center;
+}
+
+.container > .icons{
+    line-height: 16px;
+}
+.container > .icons > span{
+    margin-right: 10px;
+    cursor: pointer;
+}
+.container > .icons > span:nth-child(1):hover i{
+    color:rgb(105, 151, 221);
+}
+.container > .icons > span:nth-child(2):hover i{
+    color:#f55;
+}
+.container > .icons > span:nth-child(3):hover i{
+    color:rgb(236, 221, 3);
+}
+.container > .icons > span  i{
+    color: #bbb;
+    margin-right: 2px;
+    vertical-align: -2px;
+}
+.container > .icons .icons_tag{
+    color: #aaa;
+    margin-right: 8px;
+}
+
+

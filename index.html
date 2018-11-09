@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 50%;
+            background: #999;
+        }
+        .box::before{
+            content: '';
+            padding-top: 100%;
+            float: left;
+        }
+        .box::after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div></div>
+    </div>
+    <script>
+        const ary = (fn, n) => (...args) => {console.log(...args);return fn(...args.slice(0, n))};
+        const firstTwoMax = ary(Math.max, 2);
+        [[2, 6, 'a'], [8, 4, 6], [10]].map(x => firstTwoMax(...x)); // [6, 8, 10]
+    </script>
+</body>
+</html>

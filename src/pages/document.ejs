@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<title><%= context.title %></title>
+<!-- <script src="https://as.alipayobjects.com/g/component/??es6-shim/0.35.1/es6-sham.min.js,es6-shim/0.35.1/es6-shim.min.js"></script> -->
+    <style type="text/css">
+        #nprogress .bar {
+            background: rgb(141, 216, 29) !important;
+        }
+        #nprogress .peg {
+            box-shadow: 0 0 10px rgb(141, 216, 29), 0 0 5px rgb(141, 216, 29) !important;
+        }
+        #nprogress .spinner-icon {
+            border-top-color: rgb(141, 216, 29) !important;
+            border-left-color: rgb(141, 216, 29) !important;
+        }
+        #bouncing > div{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+            height: 250px;
+        }
+    </style> 
+</head>
+<body>
+    <div id="bouncing" class="bouncing-loader" >
+        <div class="bouncing-box">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div id="<%= context.config.mountElementId %>"></div>
+    <script>
+        var bouncing = document.getElementById('bouncing');
+        document.body.removeChild(bouncing);
+    </script>
+</body>
+</html>

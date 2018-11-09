@@ -1,0 +1,12 @@
+body{
+  background:#f5f5d5;
+  background: url('https://www.zyzcss.xyz/images/bg.png');
+  background-position: left top;
+  background-size: auto;
+  background-repeat: repeat;
+  background-attachment: fixed;
+}
+.container{
+  min-height: calc(100vh - 20px);
+  padding-bottom: 80px;
+}

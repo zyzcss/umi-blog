@@ -1,0 +1,51 @@
+
+ .message_wrap{
+    width: 100%;
+    margin: 10px 0px;
+}
+.message_top{
+    display: flex;
+    width: 100%;
+}
+.message_wrap > .message_top > .message_corver{
+    width: 45px;
+    height: 45px;
+    display: block;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+.message_wrap > .message_divider{
+    margin: 12px 0;
+}
+.message_wrap > .message_top > .message_info{
+    padding-left: 10px;
+    width: 100%;
+}
+.message_wrap > .message_top > .message_info > .message_name{
+    height: 16px;
+    line-height: 16px;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 2px;
+}
+.message_wrap > .message_top > .message_info > .message_name > .message_time{
+    float: right;
+}
+.message_wrap > .message_top > .message_info > .message_name > .message_time a{
+    color: #8898f9;
+}
+.message_wrap > .message_top > .message_info > .message_content{
+    color: black;
+    word-break: break-all;
+}
+.message_box{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.message_box .message_input{
+    width: 50%;
+}
+.message_box > .message_cancel{
+    cursor: pointer;
+}
