@@ -10,12 +10,18 @@ class Header extends Component {
         }
     }
     changeCheck = (url,index) => {
+        const locationUrl = window.location.href;
+        if(url === locationUrl.slice(locationUrl.lastIndexOf('/'))){
+            return;
+        }
         router.push(url);
         this.setState({
             checkIndex:index
         })
     }
     componentDidUpdate(){
+        console.log('====');
+        
         const url = window.location.href;
         let defaultIndex = 0;
         switch(url.slice(url.lastIndexOf('/') + 1)){

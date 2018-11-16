@@ -77,6 +77,8 @@
 
 .container > .icons{
     line-height: 16px;
+    display: flex;
+    flex-wrap: wrap;
 }
 .container > .icons > span{
     margin-right: 10px;
@@ -96,9 +98,4 @@
     margin-right: 2px;
     vertical-align: -2px;
 }
-.container > .icons .icons_tag{
-    color: #aaa;
-    margin-right: 8px;
-}
-
 

@@ -83,7 +83,7 @@ class Tag extends Component {
         const {searchFail,searchEnd} = this.state;
         const {searchList,searchLoadding, tags,minCount,sumCount} = this.props;
         const articles = searchList.map((article,index)=> <Article article={article} key={index}/>)
-        const tagsWord = tags.map((tag,index) => {
+        const tagsWord = tags.map((tag) => {
             const multiple = (tag['count'] - minCount)/sumCount;
             return(<span key={tag['id']} 
                 className={styles.tag} 

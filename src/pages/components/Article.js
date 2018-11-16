@@ -1,9 +1,8 @@
-import { Component } from 'react';
-import Link from 'umi/link'
-import {Icon} from 'antd'
+import { Component } from 'react'
 import styles from './Article.css'
-import tools from '../../common/Tools'
+import Link from 'umi/link'
 import Tag from './Tag'
+import ArticleInformation from './ArticleInformation'
 class Article extends Component {
     constructor(props) {
         super(props);
@@ -22,11 +21,8 @@ class Article extends Component {
                 : ''}
                 <div className={styles.describe}>{describe}</div>
                 <div className={styles.icons}>
-                    <span title="发布时间"><Link to={`article?id=${article.id}`}><Icon type="clock-circle" theme="filled" />{tools.getDateString(article.article_date)}</Link></span>
-                    <span title="观看次数"><Link to={`article?id=${article.id}`}><Icon type="fire" theme="filled" />{article.article_click}</Link></span>
-                    <span title="评论数"><Link to={`article?id=${article.id}#message`}><Icon type="smile" theme="filled" />{article.comment}</Link></span>
-                    <span style={{cursor:'default',verticalAlign:'1px'}}>/</span>
-                    <Tag />
+                    <ArticleInformation article={article} isLink={true}/>
+                    <Tag article_tags={article.article_tags}/>
                 </div>
             </div>
         );
