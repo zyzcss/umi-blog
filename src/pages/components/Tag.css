@@ -2,19 +2,20 @@ a.icons_tag{
     color: #aaa;
     margin-right: 8px;
 }
-.tags_container{
-    cursor: default;
+.row{
+    width: 100%;
+    display: none;
+    height: 4px;
 }
-.tags_container > .slash{
+.slash{
     vertical-align:1px;
     margin-right:8px;
 }
 @media screen and (max-width: 576px) {
-    .tags_container{
-        width: 100%;
-        margin-top: 3px;
-    }
-    .tags_container > .slash{
+    .slash{
         display: none;
+    }
+    .row{
+        display: block;
     }
 }

@@ -1,5 +1,9 @@
 import request from '../common/request';
-let length = 0;
+
+let length = 0,
+	offset = 0;
+const limit = 5;
+
 export default {
 	namespace: 'global',
 	state: {
@@ -8,13 +12,14 @@ export default {
 		searchList:[],
 		tags:[],
 		minCount:-1,
-		sumCount:-1
+		sumCount:-1,
+		isLoadding: false
 	},
 	reducers: {
 		setArticles(state, { payload: { articles } }) {
 			return {
 				...state,
-				articles,
+				articles: state.articles.concat(articles),
 			}
 		},
 		search(state, { payload: { searchLoadding,searchList } }) {
@@ -32,12 +37,28 @@ export default {
 				sumCount
 			}
 		},
+		setIsLoadding(state, { payload: { isLoadding } }){
+			return{
+				...state,
+				isLoadding
+			}
+		}
 	},
 	effects: {
-		*getArticles(_, { call, put }) {
+		*getArticles(_, { select, call, put }) {
+			const isLoadding = yield select(state => state.global.isLoadding);
+			if(isLoadding){
+				return;
+			}
+			yield put({
+				type: 'setIsLoadding',
+				payload: {
+					isLoadding: true
+				}
+			});
 			const response = yield call(request, {
 				method: 'GET',
-				url: '/articles',
+				url: `/articles?limit=${limit}&offset=${offset}`,
 			});
 			if(response['data'] && response['data'].length !== length){
 				length = response['data'].length;
@@ -47,7 +68,14 @@ export default {
 						articles: response.data
 					}
 				});
+				offset += limit;
 			}
+			yield put({
+				type: 'setIsLoadding',
+				payload: {
+					isLoadding: false
+				}
+			});
 		},
 		*getSearch({payload}, { call, put }) {
 			yield put({

@@ -1,8 +1,9 @@
 import { connect } from 'dva';
 import { Component } from 'react'
-import request from '../../common/request'
 import Article from '../components/Article'
 import Loadding from '../components/Loadding'
+import ScrollReveal from 'scrollreveal';
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -14,13 +15,19 @@ class App extends Component {
 		dispatch({
 			type: 'global/getArticles'
 		});
-		window.scrollTo(0,0)
+		window.scrollTo(0,0);
+		ScrollReveal().reveal('.index_article', { scale: 0.1 ,interval: 50});
 	}
-	async axios(){
+	/* async axios(){
 		const data = await request({
 			method: 'GET',
 			url: '/articles',
 		});
+	} */
+	componentDidUpdate(preProp){
+		if(preProp.articles.length !== this.props.articles.length){
+			ScrollReveal().reveal('.index_article', { scale: 0.1 ,interval: 50});
+		}
 	}
 	render() {
 		console.log('aritcles',this.props.articles);

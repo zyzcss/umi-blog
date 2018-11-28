@@ -4,6 +4,7 @@ import styles from './index.css'
 import Article from '../components/Article'
 import request from '../../common/request'
 import Loadding from '../components/Loadding'
+import ScrollReveal from 'scrollreveal';
 const colorBoard = ['#6F706F','#559A3C','#F69997','#F36D6A','#FFE581','#FFE066','#5F9FB9','#3787A8','#8ACCC0','#70C1B3','#DC5754']
 class Tag extends Component {
     constructor(props) {
@@ -20,6 +21,7 @@ class Tag extends Component {
 		dispatch({
             type: 'global/getTags',
         });
+        ScrollReveal().reveal('.index_article', { scale: 0.1 ,interval: 50});
     }
     changeSearch = (e) => {
         this.setState({
@@ -79,6 +81,11 @@ class Tag extends Component {
             }
 		});
     }
+    componentDidUpdate(preProp){
+		if(preProp.searchList !== this.props.searchList && this.props.searchList.length > 0){
+			ScrollReveal().reveal('.index_article', { scale: 0.1 ,interval: 50});
+		}
+	}
     render() { 
         const {searchFail,searchEnd} = this.state;
         const {searchList,searchLoadding, tags,minCount,sumCount} = this.props;

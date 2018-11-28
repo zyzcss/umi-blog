@@ -14,7 +14,7 @@ class Article extends Component {
                         ? article.article_describe
                         : article.article_content.slice(0,50) + '...' ;
         return (  
-            <div className={styles.container}>
+            <div className={styles.container + " index_article"}>
                 <div className={styles.title} title={article.article_title}><Link to={`article?id=${article.id}`}>{article.article_title}</Link></div>
                 {article.article_corver ?
                 <Link to={`article?id=${article.id}`}><img className={styles.corver} src={article.article_corver} alt={article.article_title}/></Link>

@@ -25,6 +25,7 @@
     "axios-progress-bar": "^1.2.0",
     "emojione": "^4.0.0",
     "react-intl": "^2.4.0",
+    "scrollreveal": "^4.0.5",
     "socket.io-client": "^2.1.1"
   },
   "lint-staged": {

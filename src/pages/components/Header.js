@@ -20,8 +20,6 @@ class Header extends Component {
         })
     }
     componentDidUpdate(){
-        console.log('====');
-        
         const url = window.location.href;
         let defaultIndex = 0;
         switch(url.slice(url.lastIndexOf('/') + 1)){
