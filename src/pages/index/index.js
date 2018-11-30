@@ -2,8 +2,7 @@ import { connect } from 'dva';
 import { Component } from 'react'
 import Article from '../components/Article'
 import Loadding from '../components/Loadding'
-import ScrollReveal from 'scrollreveal';
-
+import animation from '../../common/animation';
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -16,7 +15,7 @@ class App extends Component {
 			type: 'global/getArticles'
 		});
 		window.scrollTo(0,0);
-		ScrollReveal().reveal('.index_article', { scale: 0.1 ,interval: 50});
+		animation.showScrollAnimation();
 	}
 	/* async axios(){
 		const data = await request({
@@ -26,7 +25,7 @@ class App extends Component {
 	} */
 	componentDidUpdate(preProp){
 		if(preProp.articles.length !== this.props.articles.length){
-			ScrollReveal().reveal('.index_article', { scale: 0.1 ,interval: 50});
+			animation.showScrollAnimation();
 		}
 	}
 	render() {
