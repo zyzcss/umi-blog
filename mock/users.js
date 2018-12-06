@@ -99,7 +99,7 @@ export default {
             res.json({
                 "id": 23,
                 "email": "yzoli@163.com",
-                "name": "<div></div>",
+                "name": "asas",
                 "type": 0,
                 "articleid": 4,
                 "content": "asa<a href=\"#message6\">@&lt;div&gt;zzz&lt;/div&gt;</a>&lt;name&gt;&lt;div&gt;",

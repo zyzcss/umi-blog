@@ -34,10 +34,16 @@ class App extends Component {
 		const Articles = articles.map((article,index) => 
 			<Article article={article} key={index} />
 		)
+		const loadding = !articles || articles.length == 0;
 		return (
 			<div>
-				<div className="loadding-container">
-					<Loadding loadding={!articles || articles.length == 0}/>
+				<div 
+					className="loadding-container" 
+					style={{
+						height: loadding ? '50px' : '0px'
+					}}
+				>
+					<Loadding loadding={loadding}/>
 				</div>	
 				{Articles}
 			</div>

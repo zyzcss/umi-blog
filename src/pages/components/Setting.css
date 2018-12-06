@@ -13,7 +13,7 @@
     position: absolute;
     background: #ffffff;
     text-align: center;
-    top: -18px;
+    top: -20px;
     right: 20px;
     width: 40px;
     height: 18px;
@@ -32,4 +32,7 @@
 }
 .setting_content{
     margin-top: 5px;
+}
+.setting_item{
+    margin: 8px 0;
 }

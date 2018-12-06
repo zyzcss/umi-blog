@@ -1,9 +1,11 @@
 import request from '../common/request';
-
+import Tools from '../common/Tools'
 let length = 0,
 	offset = 0;
 const limit = 5;
-
+const localAnimationSwitch = localStorage.getItem('animationSwitch'); 
+const localEmojiSwitch = localStorage.getItem('emojiSwitch'); 
+const defaultEmojiSwitch = Tools.isPc() ? true : false;
 export default {
 	namespace: 'global',
 	state: {
@@ -13,7 +15,11 @@ export default {
 		tags:[],
 		minCount:-1,
 		sumCount:-1,
-		isLoadding: false
+		isLoadding: false,
+		setting:{
+			animationSwitch: localAnimationSwitch == null ? true : localAnimationSwitch,
+			emojiSwitch: localEmojiSwitch == null ? defaultEmojiSwitch : localEmojiSwitch,
+		}
 	},
 	reducers: {
 		setArticles(state, { payload: { articles } }) {
@@ -41,6 +47,15 @@ export default {
 			return{
 				...state,
 				isLoadding
+			}
+		},
+		setSetting(state, { payload: { setting } }){
+			return{
+				...state,
+				setting:{
+					...state.setting,
+					...setting
+				}
 			}
 		}
 	},

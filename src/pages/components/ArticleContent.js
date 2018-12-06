@@ -31,20 +31,24 @@ class ArticleContent extends Component {
     }
     scrollToMessage = (url) => {
         const target = document.getElementById(url);
-        console.log(target);
-        
         if(target)tools.scollToTop(target);//target.scrollIntoView();
     }
     render() {
         const article = this.props.article; 
         const describe = article.article_describe;
+        const emojiSwitch = this.props.emojiSwitch;
         return (  
             <React.Fragment>
             <div className={styles.container}>
                 <div className={styles.title} title={article.article_title}>{article.article_title}</div>
                 {article.article_corver ? <img className={styles.corver} src={article.article_corver} alt={article.article_title}/> : ''}
                 <div className={styles.describe}>{describe}</div>
-                <div className={styles.describe} dangerouslySetInnerHTML={{__html:emojione.toImage(article.article_content)}}>
+                <div 
+                    className={styles.describe} 
+                    dangerouslySetInnerHTML={{
+                        __html:emojiSwitch ? emojione.toImage(article.article_content) : article.article_content
+                    }}
+                    >
                 </div>
                 <div className={styles.icons}>
                     <ArticleInformation article={article} commentClick={() => this.scrollToMessage('message')}/>
@@ -60,7 +64,9 @@ class ArticleContent extends Component {
     }
 }
 function mapStateToProps(state) {
+    const {setting} = state.global;
 	return {
+        emojiSwitch:setting.emojiSwitch
 	};
 }
 export default connect(mapStateToProps)(ArticleContent);

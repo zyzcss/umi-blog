@@ -23,6 +23,7 @@ const formItemLayout2 = {
         xs: { span: 24 },
     },
 };
+
 class Message extends Component {
     constructor(props) {
         super(props);
@@ -144,7 +145,7 @@ class Message extends Component {
                 <FormItem>
                     {getFieldDecorator('remember', {
                         valuePropName: 'checked',
-                        initialValue: true,
+                        initialValue: localStorage.getItem('remeber') !== null ? false : true,
                     })(
                         <Checkbox>记住信息</Checkbox>
                     )}
@@ -160,15 +161,6 @@ class Message extends Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                const reg = /<a href="#message[0-9]{1,6}">@\S+<\/a>/;
-                const strs = values['content'].match(reg);
-                if(strs){
-                    const strA = strs[0];
-                    const strAIndex = strA.lastIndexOf('<');
-                    const strAContent = strA.slice(strA.indexOf('@'), strAIndex)
-                    const strALeft = strA.slice(0, strA.indexOf('>') + 1)
-                    const strARigth = strA.slice(strAIndex);
-                }
                 this.sendMessageRequest(values)
             }
         });
@@ -190,6 +182,8 @@ class Message extends Component {
                 messageRenderId:-1
             })
             const message = response['data'];
+            console.log(message);
+            
             if(data.remember){
                 //记住信息
                 localStorage.setItem('userInfo',JSON.stringify({
@@ -197,12 +191,15 @@ class Message extends Component {
                     home:message['home'],
                     email:message['email']
                 }))
+                localStorage.removeItem('remeber')
                 const {setFieldsValue} = this.props.form;
                 setFieldsValue({
                     content:''
                 })
             }else{
-                setTimeout(this.props.form.resetFields,3000);
+                setTimeout(this.props.form.resetFields,300);
+                localStorage.removeItem('userInfo')
+                localStorage.setItem('remeber','false')
             }
         }
     }
