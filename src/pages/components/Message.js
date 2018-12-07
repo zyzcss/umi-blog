@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Input, Checkbox, Button, Form ,Divider} from 'antd'
+import { connect } from 'dva';
 import tools from '../../common/Tools.js'
 import request from '../../common/request.js'
 import emojione from 'emojione'
@@ -166,6 +167,7 @@ class Message extends Component {
         });
     }
     async sendMessageRequest(data){
+        const { dispatch } = this.props;
         this.setState({
             sendLoadding:true
         })
@@ -201,6 +203,14 @@ class Message extends Component {
                 localStorage.removeItem('userInfo')
                 localStorage.setItem('remeber','false')
             }
+            //添加dom
+            dispatch({
+                type: 'global/setMessage',
+                payload:{
+                    message,
+                    articleId:this.props.articleId
+                }
+            });
         }
     }
     repeatMessage = (messageRenderId, username) =>{
@@ -234,4 +244,11 @@ class Message extends Component {
     }
 }
  
-export default Form.create()(Message);;
+function mapStateToProps(state) {
+    const {setting} = state.global;
+	return {
+        emojiSwitch:setting.emojiSwitch
+	};
+}
+
+export default connect(mapStateToProps)(Form.create()(Message));

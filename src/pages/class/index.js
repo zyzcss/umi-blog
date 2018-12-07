@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'dva';
 import styles from './index.css'
-import Article from '../components/Article'
 import request from '../../common/request'
-import Loadding from '../components/Loadding'
 import animation from '../../common/animation';
+import Article from '../components/Article'
+import Loadding from '../components/Loadding'
 const colorBoard = ['#6F706F','#559A3C','#F69997','#F36D6A','#FFE581','#FFE066','#5F9FB9','#3787A8','#8ACCC0','#70C1B3','#DC5754']
 class Tag extends Component {
     constructor(props) {
@@ -19,7 +19,7 @@ class Tag extends Component {
     componentDidMount(){
         const { dispatch } = this.props;
 		dispatch({
-            type: 'global/getTags',
+            type: 'class/getTags',
         });
         animation.showScrollAnimation();
     }
@@ -35,7 +35,7 @@ class Tag extends Component {
         }
         const { dispatch } = this.props;
 		dispatch({
-            type: 'global/search',
+            type: 'class/search',
             payload:{
                 searchLoadding:true,
                 searchList:[]
@@ -50,7 +50,7 @@ class Tag extends Component {
         });
         if(response['data'] && response['data'].length > 0){
             dispatch({
-                type: 'global/search',
+                type: 'class/search',
                 payload:{
                     searchLoadding:false,
                     searchList:response['data']
@@ -58,7 +58,7 @@ class Tag extends Component {
             });
         }else{
             dispatch({
-                type: 'global/search',
+                type: 'class/search',
                 payload:{
                     searchLoadding:false,
                     searchList:[]
@@ -75,7 +75,7 @@ class Tag extends Component {
         })
         const { dispatch } = this.props;
 		dispatch({
-            type: 'global/getSearch',
+            type: 'class/getSearch',
             payload:{
                 id
             }
@@ -108,7 +108,7 @@ class Tag extends Component {
                         <input 
                             type="text" 
                             className={styles.search_input} 
-                            placeholder="请输入你要搜索的内容 空格区分关键词"
+                            placeholder="空格区分关键词"
                             value={this.state.searchText}
                             onChange={(e) => this.changeSearch(e)}
                             onKeyPress={(e)=>{
@@ -128,17 +128,13 @@ class Tag extends Component {
                 <div className="loadding-container" style={{height:50}}>
                     <Loadding loadding={searchLoadding} fail={searchFail}/>
                 </div>
-                {/* <Article article={{id: 18, article_title: "test ", 
-                article_describe: "测试测试测试测试测试", article_corver: null, article_date: "2018-10-05T15:37:39.000Z",
-                article_click:10,article_comment:null,article_content:"<p>😅😧<br></p><blockquote>笑就完事了</blockquote><p>测试测试测试</p>",article_corver:null,article_date:"2018-10-05T15:37:39.000Z",
-                article_describe:"测试测试测试测试测试",article_tags:[],article_title:"test ",article_type:0,id:18}}></Article> */}
                 {articles}
             </React.Fragment>
         );
     }
 }
 function mapStateToProps(state) {
-	const { searchLoadding,searchList,tags,minCount,sumCount } = state.global;
+	const { searchLoadding,searchList,tags,minCount,sumCount } = state.class;
 	return {
         searchLoadding,
         searchList,

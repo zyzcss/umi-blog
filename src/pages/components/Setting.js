@@ -25,6 +25,7 @@ class Setting extends Component {
         const { dispatch } = this.props;
         const setting = {};
         setting[settingName] = settingValue;
+        localStorage.setItem(settingName,JSON.stringify(settingValue));
 		dispatch({
             type: 'global/setSetting',
             payload:{
@@ -61,7 +62,7 @@ class Setting extends Component {
                         <Col span={9}><Switch defaultChecked={setting.emojiSwitch} onChange={this.changeEmoji}/></Col>
                     </Row>
                     <Row className={styles.setting_item} style={{textAlign:'center',paddingLeft:'25px'}}>
-                        (建议移动端关闭此选项)
+                        (emoji无法正常显示请开始此项)
                     </Row>
                 </div>
             </div>

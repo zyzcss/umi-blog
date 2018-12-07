@@ -57,7 +57,7 @@ class ArticleContent extends Component {
             </div>
             <div className={styles.container} id="message">
                 <div className={styles.title}>评论留言</div>
-                <Message messages={article.messages}/>
+                <Message messages={article.messages} articleId={article.id}/>
             </div>
             </React.Fragment>
         );
