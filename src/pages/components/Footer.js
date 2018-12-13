@@ -9,7 +9,7 @@ class Foter extends Component {
         return (  
             <div className={styles.footer}>
                 <p>个人网站 纯属娱乐</p>
-                <p>联系站长：yzdslloli@163.com</p>
+                <p>联系站长：<a href="mailto:yzdslloli@163.com" style={{color:'#aaa'}}>yzdslloli@163.com</a></p>
             </div>
         );
     }

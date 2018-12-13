@@ -38,6 +38,9 @@
     color: black;
     word-break: break-all;
 }
+.message_wrap > .message_top > .message_info > .message_content a{
+    color: #1890ff;
+}
 .message_box{
     width: 100%;
     margin-top: 20px;

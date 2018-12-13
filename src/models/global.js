@@ -10,7 +10,20 @@ export default {
 	namespace: 'global',
 	state: {
 		articles:[],
-		isLoadding: false,
+		currentArticle:{
+			id:null,
+			article_title:'',
+			article_describe:'',
+			article_corver:'',
+			article_date:'',
+			article_tags:[],
+			article_comments:[],
+			article_content:'',
+			article_click:null,
+			messages:[],
+			comment:0
+		},
+		isLoadding: false,/* 文章加载 */
 		setting:{
 			animationSwitch: localAnimationSwitch === null ? true : JSON.parse(localAnimationSwitch),
 			emojiSwitch: localEmojiSwitch === null ? defaultEmojiSwitch : JSON.parse(localEmojiSwitch),
@@ -38,8 +51,8 @@ export default {
 				}
 			}
 		},
-		setMessage(state, { payload: { message, articleId } }){
-			const articles = state.articles;
+		setMessage(state, { payload: { message } }){
+			/* const articles = state.articles;
 			const articleIndex = articles.findIndex((article)=> article.id = articleId);
 			const article = {...articles[articleIndex]};
 			console.log(article,articleIndex,articleId,articles);
@@ -62,8 +75,38 @@ export default {
 			return{
 				...state,
 				articles:[...articles.slice(0, articleIndex), article, ...articles.slice(articleIndex + 1)]
+			} */
+			const currentArticle = state.currentArticle;
+			let messages = currentArticle.messages;
+			
+			if(message.reply != null){
+				//回复留言
+				const targetMessage = Tools.deepArrayFind(messages, 'son', function(obj){
+					return obj.id == message.reply
+				})
+				if(targetMessage.son){
+					targetMessage.son.push(message);
+				}else{
+					targetMessage.son = [message]
+				}
+			}else{
+				//回复文章
+				messages = [...messages,message]
 			}
-		}
+			return{
+				...state,
+				currentArticle:{
+					...currentArticle,
+					messages,
+				}
+			}
+		},
+		setArticle(state, { payload: { article } }) {
+			return {
+				...state,
+				currentArticle: article,
+			}
+		},
 	},
 	effects: {
 		*getArticles(_, { select, call, put }) {

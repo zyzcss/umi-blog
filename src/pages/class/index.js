@@ -125,7 +125,7 @@ class Tag extends Component {
                     </p>
                 </div>
                 {searchEnd ? <div className={styles.search_nothing}>暂未搜索到相关内容</div> : ''}
-                <div className="loadding-container" style={{height:50}}>
+                <div className="loadding-container" style={{height:50,marginTop:20,marginBottom:0}}>
                     <Loadding loadding={searchLoadding} fail={searchFail}/>
                 </div>
                 {articles}

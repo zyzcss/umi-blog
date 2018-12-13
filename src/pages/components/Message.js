@@ -207,8 +207,7 @@ class Message extends Component {
             dispatch({
                 type: 'global/setMessage',
                 payload:{
-                    message,
-                    articleId:this.props.articleId
+                    message
                 }
             });
         }

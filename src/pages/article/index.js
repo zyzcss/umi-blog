@@ -8,36 +8,25 @@ import router from 'umi/router';
 class Article extends Component {
     constructor(props) {
         super(props);
-        this.state = {  
-            article:{
-                id:null,
-                article_title:'',
-                article_describe:'',
-                article_corver:'',
-                article_date:'',
-                article_tags:[],
-                article_comments:[],
-                article_content:'',
-                article_click:null,
-                messages:[],
-                comment:0
-            }
-        }
     }
     componentDidMount(){
         const id = parseInt(Tools.getUrlString('id'),10);
-        const article = this.props.articles.find((article) =>
+        const {articles, dispatch} = this.props;
+        const article = articles.find((article) =>
             article.id === id 
         );
         if(article){
             //存在 直接使用
-            this.setState({
-                article
+            dispatch({
+                type: 'global/setArticle',
+                payload:{
+                    article,
+                }
             })
-            request({
+            /* request({
                 method: 'GET',
                 url: '/article/' + id,
-            });
+            }); */
         }else{
             //ajax请求后台获取
             this.getArticle(id);
@@ -49,15 +38,39 @@ class Article extends Component {
 			url: '/article/' + id,
         });
         if(data && data.data && !data.data.msg){
-            this.setState({
-                article:data.data
+            this.props.dispatch({
+                type: 'global/setArticle',
+                payload:{
+                    article:data.data
+                }
             })
         }else{
             router.push('/404');
         }
-	}
+    }
+    componentWillUnmount(){
+        const {dispatch} = this.props;
+        dispatch({
+            type: 'global/setArticle',
+            payload:{
+                article:{
+                    id:null,
+                    article_title:'',
+                    article_describe:'',
+                    article_corver:'',
+                    article_date:'',
+                    article_tags:[],
+                    article_comments:[],
+                    article_content:'',
+                    article_click:null,
+                    messages:[],
+                    comment:0
+                },
+            }
+        })
+    }
     render() { 
-        const article = this.state.article;
+        const article = this.props.currentArticle;
         return (  
             <div>
                 <ArticleContent article={article} />
@@ -66,9 +79,10 @@ class Article extends Component {
     }
 }
 function mapStateToProps(state) {
-	const { articles } = state.global;
+	const { articles, currentArticle } = state.global;
 	return {
-		articles,
+        articles,
+        currentArticle
 	};
 }
 export default connect(mapStateToProps)(Article);

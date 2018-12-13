@@ -44,7 +44,20 @@ export default {
     },
      'GET /search/*':(req,res) =>{
         setTimeout(() => {
-            res.json([])
+            res.json([{"id":4,"article_title":"wlp dswlp","article_describe":"测试","article_corver":"uploads/1540387887946.jpg","article_date":"2018-10-24T13:33:03.000Z","article_content":"<p>😀😱😉😋<img src=\"uploads/1540387887946.jpg\" style=\"max-width: 100%;\"><br></p>","article_click":19,"article_type":0,
+            "article_tags":[{"id":7,"articleid":4,"tagid":1,"tag":{"id":1,"name":"node"}}],
+            "messages":[
+                {"id":1,"name":"1","home":"www.zyzcss.xyz","articleid":4,"imgUrl":null,"content":"asddassad","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-26T05:48:22.000Z",
+                "son":[
+                        {"id":2,"name":"2","home":null,"articleid":4,"imgUrl":null,"content":"ccc","reply":1,"type":0,"isAudit":0,"createTime":"2018-10-27T05:49:15.000Z",
+                        "son":[
+                            {"id":3,"name":"3","home":null,"articleid":4,"imgUrl":null,"content":"cc","reply":2,"type":0,"isAudit":0,"createTime":"2018-11-10T05:57:03.000Z"}
+                        ]}
+                    ]
+                },
+            {"id":4,"name":"4","home":"sadsa","articleid":4,"imgUrl":null,"content":"vvv","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-26T05:48:22.000Z"},
+            {"id":5,"name":"5","home":null,"articleid":4,"imgUrl":null,"content":"&lt;div&gt;asd&lt;/div&gt;","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-28T14:12:56.000Z"},
+            {"id":6,"name":"6","home":null,"articleid":4,"imgUrl":null,"content":"&lt;div&gt;asd&lt;/div&gt;","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-28T14:12:56.000Z"}],"comment":6}])
         },100)
     }, 
     'GET /tags':(req,res) =>{
@@ -99,10 +112,10 @@ export default {
             res.json({
                 "id": 23,
                 "email": "yzoli@163.com",
-                "name": "asas",
+                "name": "test",
                 "type": 0,
                 "articleid": 4,
-                "content": "asa<a href=\"#message6\">@&lt;div&gt;zzz&lt;/div&gt;</a>&lt;name&gt;&lt;div&gt;",
+                "content": "test<a href=\"#message6\">@&lt;div&gt;zzz&lt;/div&gt;</a>&lt;name&gt;&lt;div&gt;",
                 "imgUrl": "/corver/user.png",
                 "isAudit": 0,
                 "createTime": "2018-11-02T08:50:50.404Z"
