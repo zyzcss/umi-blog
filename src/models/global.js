@@ -1,7 +1,6 @@
 import request from '../common/request';
 import Tools from '../common/Tools'
-let length = 0,
-	offset = 0;
+let offset = 5;
 const limit = 5;
 const localAnimationSwitch = localStorage.getItem('animationSwitch'); 
 const localEmojiSwitch = localStorage.getItem('emojiSwitch'); 
@@ -23,23 +22,26 @@ export default {
 			messages:[],
 			comment:0
 		},
-		isLoadding: false,/* 文章加载 */
+		allArticles:[],
 		setting:{
 			animationSwitch: localAnimationSwitch === null ? true : JSON.parse(localAnimationSwitch),
 			emojiSwitch: localEmojiSwitch === null ? defaultEmojiSwitch : JSON.parse(localEmojiSwitch),
 		}
 	},
 	reducers: {
-		setArticles(state, { payload: { articles } }) {
+		setArticles(state, { payload: { articles, count } }) {
+			let allArticles = state.allArticles;
+			if(limit + offset >= count){
+				//头+尾
+				allArticles = [...allArticles.slice(0, offset), ...articles]
+			}else{
+				//头+中+尾
+				allArticles = [...allArticles.slice(0, offset), ...articles, ...allArticles.slice(offset + limit)] 
+			}
 			return {
 				...state,
-				articles: state.articles.concat(articles),
-			}
-		},
-		setIsLoadding(state, { payload: { isLoadding } }){
-			return{
-				...state,
-				isLoadding
+				articles,
+				allArticles
 			}
 		},
 		setSetting(state, { payload: { setting } }){
@@ -107,6 +109,21 @@ export default {
 				currentArticle: article,
 			}
 		},
+		setHasArticles(state){
+			console.log('===');
+			
+			const {allArticles} = state
+			let articles;
+			if(allArticles[offset]){
+				articles = allArticles.slice(offset, limit)
+			}else{
+				articles = [];
+			}
+			return {
+				...state,
+				articles
+			}
+		}
 	},
 	effects: {
 		*getArticles(_, { select, call, put }) {
@@ -115,31 +132,23 @@ export default {
 				return;
 			}
 			yield put({
-				type: 'setIsLoadding',
-				payload: {
-					isLoadding: true
-				}
+				type: 'setHasArticles',
 			});
 			const response = yield call(request, {
 				method: 'GET',
 				url: `/articles?limit=${limit}&offset=${offset}`,
 			});
-			if(response['data'] && response['data'].length !== length){
-				length = response['data'].length;
+			if(response['data']){
+				const {articles, count} = response.data;
 				yield put({
 					type: 'setArticles',
 					payload: {
-						articles: response.data
+						articles,
+						count 
 					}
 				});
 				offset += limit;
 			}
-			yield put({
-				type: 'setIsLoadding',
-				payload: {
-					isLoadding: false
-				}
-			});
 		},
 		throwError() {
 			throw new Error('hi error');
