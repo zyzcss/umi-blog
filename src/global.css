@@ -168,3 +168,11 @@ a:visited, a:link,a:hover,a:active{
 .index-article-show{
   visibility: visible !important;
 }
+
+.right{
+  float: right;
+}
+
+.left{
+  float: left;
+}

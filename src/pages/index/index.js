@@ -1,8 +1,9 @@
 import { connect } from 'dva';
-import { Component } from 'react'
-import Article from '../components/Article'
-import Loadding from '../components/Loadding'
+import { Component } from 'react';
+import Article from '../components/Article';
+import Loadding from '../components/Loadding';
 import animation from '../../common/animation';
+import Paging from '../components/Paging'
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -17,20 +18,23 @@ class App extends Component {
 		window.scrollTo(0,0);
 		animation.showScrollAnimation();
 	}
-	/* async axios(){
-		const data = await request({
-			method: 'GET',
-			url: '/articles',
-		});
-	} */
 	componentDidUpdate(preProp){
 		if(preProp.articles.length !== this.props.articles.length){
 			animation.showScrollAnimation();
 		}
 	}
+	changePage = (isNext) =>{
+		const { dispatch } = this.props;
+		dispatch({
+			type: 'index/changPage',
+			payload:{
+				isNext:isNext
+			}
+		});
+		window.scrollTo(0,0);
+	}
 	render() {
-		console.log('aritcles',this.props.articles);
-		const articles = this.props.articles
+		const {articles, count, current} = this.props;
 		const Articles = articles.map((article,index) => 
 			<Article article={article} key={index} />
 		)
@@ -46,14 +50,22 @@ class App extends Component {
 					<Loadding loadding={loadding}/>
 				</div>	
 				{Articles}
+				<Paging 
+					changePage= {(isNext) =>this.changePage(isNext)}
+					current= {current}
+					count= {count}
+				/>
 			</div>
 		);
 	}
 }
 function mapStateToProps(state) {
 	const { articles } = state.global;
+	const {count, current} = state.index;
 	return {
 		articles,
+		current,
+		count
 	};
 }
 export default connect(mapStateToProps)(App);

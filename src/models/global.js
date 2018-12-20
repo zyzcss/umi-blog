@@ -1,7 +1,5 @@
 import request from '../common/request';
 import Tools from '../common/Tools'
-let offset = 5;
-const limit = 5;
 const localAnimationSwitch = localStorage.getItem('animationSwitch'); 
 const localEmojiSwitch = localStorage.getItem('emojiSwitch'); 
 const defaultEmojiSwitch = Tools.isPc() ? true : false;
@@ -26,10 +24,11 @@ export default {
 		setting:{
 			animationSwitch: localAnimationSwitch === null ? true : JSON.parse(localAnimationSwitch),
 			emojiSwitch: localEmojiSwitch === null ? defaultEmojiSwitch : JSON.parse(localEmojiSwitch),
-		}
+		},
+		isLoadding: false,/* 文章加载 */
 	},
 	reducers: {
-		setArticles(state, { payload: { articles, count } }) {
+		setArticles(state, { payload: { articles, count, limit, offset } }) {
 			let allArticles = state.allArticles;
 			if(limit + offset >= count){
 				//头+尾
@@ -45,6 +44,8 @@ export default {
 			}
 		},
 		setSetting(state, { payload: { setting } }){
+			console.log('=cccc');
+			
 			return{
 				...state,
 				setting:{
@@ -109,13 +110,17 @@ export default {
 				currentArticle: article,
 			}
 		},
-		setHasArticles(state){
-			console.log('===');
-			
+		setIsLoadding(state, { payload: { isLoadding } }){
+			return{
+				...state,
+				isLoadding
+			}
+		},
+		setHasArticles(state, { payload: { limit, offset } }){
 			const {allArticles} = state
 			let articles;
 			if(allArticles[offset]){
-				articles = allArticles.slice(offset, limit)
+				articles = allArticles.slice(offset, offset + limit)
 			}else{
 				articles = [];
 			}
@@ -126,13 +131,24 @@ export default {
 		}
 	},
 	effects: {
-		*getArticles(_, { select, call, put }) {
+		*getArticles({ payload = {} }, { select, call, put }) {
+			const {limit= Tools.getLimit(), offset= 0} = payload;
 			const isLoadding = yield select(state => state.global.isLoadding);
 			if(isLoadding){
 				return;
 			}
 			yield put({
+				type: 'setIsLoadding',
+				payload: {
+					isLoadding: true
+				}
+			});
+			yield put({
 				type: 'setHasArticles',
+				payload:{
+					limit,
+					offset
+				},
 			});
 			const response = yield call(request, {
 				method: 'GET',
@@ -143,12 +159,24 @@ export default {
 				yield put({
 					type: 'setArticles',
 					payload: {
+						...payload,
 						articles,
 						count 
 					}
 				});
-				offset += limit;
+				yield put({
+					type: 'index/setCount',
+					payload: {
+						count 
+					}
+				});
 			}
+			yield put({
+				type: 'setIsLoadding',
+				payload: {
+					isLoadding: false
+				}
+			});
 		},
 		throwError() {
 			throw new Error('hi error');

@@ -1,4 +1,5 @@
 import request from '../../common/request';
+import {getLimit} from '../../common/Tools';
 export default {
 	namespace: 'class',
 	state: {
@@ -6,7 +7,11 @@ export default {
 		searchList:[],
 		tags:[],
 		minCount:-1,
-        sumCount:-1,
+		sumCount:-1,
+		limit: getLimit(),
+        offset: 0,
+		current: 0,
+		count:0,
 	},
 	reducers: {
 		search(state, { payload: { searchLoadding,searchList } }) {

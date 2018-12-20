@@ -98,3 +98,7 @@ function deepArray(array, ifNameDeep, checkFn){
     }
     return false
 }
+
+exports.getLimit = function(){
+    return 5;
+}

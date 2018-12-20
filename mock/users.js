@@ -1,201 +1,238 @@
+
+const articles = [];
+articles[0] = {articles:[{
+    "id": 6,
+    "article_title": "666",
+    "article_describe": "66",
+    "article_corver": null,
+    "article_date": "2018-12-14T08:40:51.000Z",
+    "article_content": "666",
+    "article_click": 0,
+    "article_type": 0,
+    "article_tags": [],
+    "messages": [],
+    "comment": 0
+},
+{
+    "id": 5,
+    "article_title": "mysql",
+    "article_describe": "mysql",
+    "article_corver": "mysql",
+    "article_date": "2018-12-14T08:40:27.000Z",
+    "article_content": "mysql",
+    "article_click": 0,
+    "article_type": 0,
+    "article_tags": [],
+    "messages": [],
+    "comment": 0
+},
+{
+    "id": 4,
+    "article_title": "wlp dswlp",
+    "article_describe": "测试",
+    "article_corver": "uploads/1540387887946.jpg",
+    "article_date": "2018-10-24T13:33:03.000Z",
+    "article_content": "<p>😀😱😉😋<img src=\"uploads/1540387887946.jpg\" style=\"max-width: 100%;\"><br></p>",
+    "article_click": 19,
+    "article_type": 0,
+    "article_tags": [
+        {
+            "id": 7,
+            "articleid": 4,
+            "tagid": 1,
+            "tag": {
+                "id": 1,
+                "name": "node"
+            }
+        }
+    ],
+    "messages": [
+        {
+            "id": 1,
+            "name": "zzz",
+            "email": "935388383@qq.com",
+            "home": "www.zyzcss.xyz",
+            "articleid": 4,
+            "imgUrl": null,
+            "content": "asddassad",
+            "reply": null,
+            "type": 0,
+            "isAudit": 0,
+            "createTime": "2018-10-26T05:48:22.000Z",
+            "son": [
+                {
+                    "id": 2,
+                    "name": "aaa",
+                    "email": "935388383@qq.com",
+                    "home": null,
+                    "articleid": 4,
+                    "imgUrl": null,
+                    "content": "ccc",
+                    "reply": 1,
+                    "type": 0,
+                    "isAudit": 0,
+                    "createTime": "2018-10-27T05:49:15.000Z",
+                    "son": [
+                        {
+                            "id": 3,
+                            "name": "vvv",
+                            "email": null,
+                            "home": null,
+                            "articleid": 4,
+                            "imgUrl": null,
+                            "content": "cc",
+                            "reply": 2,
+                            "type": 0,
+                            "isAudit": 0,
+                            "createTime": "2018-11-10T05:57:03.000Z"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "ccc",
+            "email": "asd",
+            "home": "sadsa",
+            "articleid": 4,
+            "imgUrl": null,
+            "content": "vvv",
+            "reply": null,
+            "type": 0,
+            "isAudit": 0,
+            "createTime": "2018-10-22T02:32:57.000Z"
+        },
+        {
+            "id": 5,
+            "name": "zzz",
+            "email": "asda@qq.com",
+            "home": null,
+            "articleid": 4,
+            "imgUrl": null,
+            "content": "&lt;div&gt;asd&lt;/div&gt;",
+            "reply": null,
+            "type": 0,
+            "isAudit": 0,
+            "createTime": "2018-10-28T14:12:56.000Z"
+        },
+        {
+            "id": 6,
+            "name": "zzz",
+            "email": "asda@qq.com",
+            "home": null,
+            "articleid": 4,
+            "imgUrl": null,
+            "content": "&lt;div&gt;asd&lt;/div&gt;",
+            "reply": null,
+            "type": 0,
+            "isAudit": 0,
+            "createTime": "2018-10-28T14:12:56.000Z"
+        }
+    ],
+    "comment": 6
+},
+{
+    "id": 3,
+    "article_title": "mysql",
+    "article_describe": "test",
+    "article_corver": null,
+    "article_date": "2018-10-23T03:03:52.000Z",
+    "article_content": "<p>asdsadasdasdsdasdasdsadsadsadas测试d?</p>",
+    "article_click": 8,
+    "article_type": 0,
+    "article_tags": [
+        {
+            "id": 4,
+            "articleid": 3,
+            "tagid": 3,
+            "tag": {
+                "id": 3,
+                "name": "mysql"
+            }
+        }
+    ],
+    "messages": [],
+    "comment": 0
+},
+{
+    "id": 2,
+    "article_title": "node",
+    "article_describe": "node",
+    "article_corver": null,
+    "article_date": "2018-10-23T03:02:54.000Z",
+    "article_content": "<p>asssssssssssssssdasd😑😳😡</p>",
+    "article_click": 8,
+    "article_type": 0,
+    "article_tags": [
+        {
+            "id": 3,
+            "articleid": 2,
+            "tagid": 1,
+            "tag": {
+                "id": 1,
+                "name": "node"
+            }
+        },
+        {
+            "id": 5,
+            "articleid": 2,
+            "tagid": 2,
+            "tag": {
+                "id": 2,
+                "name": "react"
+            }
+        }
+    ],
+    "messages": [],
+    "comment": 0
+}],
+"count": 6}
+articles[1] = {
+    "articles": [
+        {
+            "id": 2,
+            "article_title": "node",
+            "article_describe": "node",
+            "article_corver": null,
+            "article_date": "2018-10-23T03:02:54.000Z",
+            "article_content": "<p>asssssssssssssssdasd😑😳😡</p>",
+            "article_click": 8,
+            "article_type": 0,
+            "article_tags": [
+                {
+                    "id": 3,
+                    "articleid": 2,
+                    "tagid": 1,
+                    "tag": {
+                        "id": 1,
+                        "name": "node"
+                    }
+                },
+                {
+                    "id": 5,
+                    "articleid": 2,
+                    "tagid": 2,
+                    "tag": {
+                        "id": 2,
+                        "name": "react"
+                    }
+                }
+            ],
+            "messages": [],
+            "comment": 0
+        }
+    ],
+    "count": 6
+}
 export default {
     'GET /articles': (req, res) => {
+        const article = req.query.offset == 0 ? articles[0] : articles[1]
         setTimeout(() => {
             /* res.writeHead(400, {'Content-Type': 'text/plain'});
             res.write('Error 400:resource not found');
             res.end(); */
-            res.json({
-                "articles": [
-                    {
-                        "id": 6,
-                        "article_title": "666",
-                        "article_describe": "66",
-                        "article_corver": null,
-                        "article_date": "2018-12-14T08:40:51.000Z",
-                        "article_content": "666",
-                        "article_click": 0,
-                        "article_type": 0,
-                        "article_tags": [],
-                        "messages": [],
-                        "comment": 0
-                    },
-                    {
-                        "id": 5,
-                        "article_title": "mysql",
-                        "article_describe": "mysql",
-                        "article_corver": "mysql",
-                        "article_date": "2018-12-14T08:40:27.000Z",
-                        "article_content": "mysql",
-                        "article_click": 0,
-                        "article_type": 0,
-                        "article_tags": [],
-                        "messages": [],
-                        "comment": 0
-                    },
-                    {
-                        "id": 4,
-                        "article_title": "wlp dswlp",
-                        "article_describe": "测试",
-                        "article_corver": "uploads/1540387887946.jpg",
-                        "article_date": "2018-10-24T13:33:03.000Z",
-                        "article_content": "<p>😀😱😉😋<img src=\"uploads/1540387887946.jpg\" style=\"max-width: 100%;\"><br></p>",
-                        "article_click": 19,
-                        "article_type": 0,
-                        "article_tags": [
-                            {
-                                "id": 7,
-                                "articleid": 4,
-                                "tagid": 1,
-                                "tag": {
-                                    "id": 1,
-                                    "name": "node"
-                                }
-                            }
-                        ],
-                        "messages": [
-                            {
-                                "id": 1,
-                                "name": "zzz",
-                                "email": "935388383@qq.com",
-                                "home": "www.zyzcss.xyz",
-                                "articleid": 4,
-                                "imgUrl": null,
-                                "content": "asddassad",
-                                "reply": null,
-                                "type": 0,
-                                "isAudit": 0,
-                                "createTime": "2018-10-26T05:48:22.000Z",
-                                "son": [
-                                    {
-                                        "id": 2,
-                                        "name": "aaa",
-                                        "email": "935388383@qq.com",
-                                        "home": null,
-                                        "articleid": 4,
-                                        "imgUrl": null,
-                                        "content": "ccc",
-                                        "reply": 1,
-                                        "type": 0,
-                                        "isAudit": 0,
-                                        "createTime": "2018-10-27T05:49:15.000Z",
-                                        "son": [
-                                            {
-                                                "id": 3,
-                                                "name": "vvv",
-                                                "email": null,
-                                                "home": null,
-                                                "articleid": 4,
-                                                "imgUrl": null,
-                                                "content": "cc",
-                                                "reply": 2,
-                                                "type": 0,
-                                                "isAudit": 0,
-                                                "createTime": "2018-11-10T05:57:03.000Z"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                "id": 4,
-                                "name": "ccc",
-                                "email": "asd",
-                                "home": "sadsa",
-                                "articleid": 4,
-                                "imgUrl": null,
-                                "content": "vvv",
-                                "reply": null,
-                                "type": 0,
-                                "isAudit": 0,
-                                "createTime": "2018-10-22T02:32:57.000Z"
-                            },
-                            {
-                                "id": 5,
-                                "name": "zzz",
-                                "email": "asda@qq.com",
-                                "home": null,
-                                "articleid": 4,
-                                "imgUrl": null,
-                                "content": "&lt;div&gt;asd&lt;/div&gt;",
-                                "reply": null,
-                                "type": 0,
-                                "isAudit": 0,
-                                "createTime": "2018-10-28T14:12:56.000Z"
-                            },
-                            {
-                                "id": 6,
-                                "name": "zzz",
-                                "email": "asda@qq.com",
-                                "home": null,
-                                "articleid": 4,
-                                "imgUrl": null,
-                                "content": "&lt;div&gt;asd&lt;/div&gt;",
-                                "reply": null,
-                                "type": 0,
-                                "isAudit": 0,
-                                "createTime": "2018-10-28T14:12:56.000Z"
-                            }
-                        ],
-                        "comment": 6
-                    },
-                    {
-                        "id": 3,
-                        "article_title": "mysql",
-                        "article_describe": "test",
-                        "article_corver": null,
-                        "article_date": "2018-10-23T03:03:52.000Z",
-                        "article_content": "<p>asdsadasdasdsdasdasdsadsadsadas测试d?</p>",
-                        "article_click": 8,
-                        "article_type": 0,
-                        "article_tags": [
-                            {
-                                "id": 4,
-                                "articleid": 3,
-                                "tagid": 3,
-                                "tag": {
-                                    "id": 3,
-                                    "name": "mysql"
-                                }
-                            }
-                        ],
-                        "messages": [],
-                        "comment": 0
-                    },
-                    {
-                        "id": 2,
-                        "article_title": "node",
-                        "article_describe": "node",
-                        "article_corver": null,
-                        "article_date": "2018-10-23T03:02:54.000Z",
-                        "article_content": "<p>asssssssssssssssdasd😑😳😡</p>",
-                        "article_click": 8,
-                        "article_type": 0,
-                        "article_tags": [
-                            {
-                                "id": 3,
-                                "articleid": 2,
-                                "tagid": 1,
-                                "tag": {
-                                    "id": 1,
-                                    "name": "node"
-                                }
-                            },
-                            {
-                                "id": 5,
-                                "articleid": 2,
-                                "tagid": 2,
-                                "tag": {
-                                    "id": 2,
-                                    "name": "react"
-                                }
-                            }
-                        ],
-                        "messages": [],
-                        "comment": 0
-                    }
-                ],
-                "count": 6
-            })
+            res.json(article)
         },1000)
     },
     'GET /article/*': (req, res) => {
