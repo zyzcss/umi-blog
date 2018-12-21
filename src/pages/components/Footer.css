@@ -5,3 +5,16 @@
     bottom: 0px;
     width: 100%;
 }
+.link_container{
+    display:inline-block;
+    text-decoration:none;
+    height:20px;
+    line-height:20px;
+}
+.link_container p {
+    float:left;
+    height:20px;
+    line-height:20px;
+    margin: 0px 0px 0px 5px; 
+    color:#939393;
+}
