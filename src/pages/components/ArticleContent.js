@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import styles from './Article.css'
-import tools from '../../common/Tools'
+import {scollToTop} from '../../common/Tools'
 import emojione from 'emojione'
 import { connect } from 'dva';
 import Message from './Message.js'
@@ -22,7 +22,7 @@ class ArticleContent extends Component {
                 window.scrollTo(0,0)
             }else{
                 const target = document.getElementById(url.slice(1));
-                if(target)tools.scollToTop(target);//target.scrollIntoView();
+                if(target)scollToTop(target);//target.scrollIntoView();
             }
             this.setState({
                 isRender: true
@@ -31,7 +31,7 @@ class ArticleContent extends Component {
     }
     scrollToMessage = (url) => {
         const target = document.getElementById(url);
-        if(target)tools.scollToTop(target);//target.scrollIntoView();
+        if(target)scollToTop(target);//target.scrollIntoView();
     }
     render() {
         const article = this.props.article; 

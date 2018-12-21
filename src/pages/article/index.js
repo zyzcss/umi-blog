@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import { connect } from 'dva';
-import Tools from '../../common/Tools'
+import {getUrlString} from '../../common/Tools'
 import request from '../../common/request.js'
 import ArticleContent from '../components/ArticleContent'
 import router from 'umi/router';
@@ -10,7 +10,7 @@ class Article extends Component {
         super(props);
     }
     componentDidMount(){
-        const id = parseInt(Tools.getUrlString('id'),10);
+        const id = parseInt(getUrlString('id'),10);
         const {articles, dispatch} = this.props;
         const article = articles.find((article) =>
             article.id === id 

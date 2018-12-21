@@ -31,7 +31,7 @@ export default {
 		setCount(state, {payload: {count}}){
 			return {
 				...state,
-				count: Math.floor(count/state.limit)
+				count: Math.ceil(count/state.limit) - 1
 			}
 		}
 	},

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Input, Checkbox, Button, Form ,Divider} from 'antd'
 import { connect } from 'dva';
-import tools from '../../common/Tools.js'
+import {getDateString, scollToTop} from '../../common/Tools.js'
 import request from '../../common/request.js'
 import emojione from 'emojione'
 import styles from './Message.css'
@@ -41,7 +41,7 @@ class Message extends Component {
     scrollToMessage(target){
         const element = document.getElementById(target);
         if(element){
-            tools.scollToTop(element);
+            scollToTop(element);
         }
     }
     componentDidMount(){
@@ -67,7 +67,7 @@ class Message extends Component {
                         <div className={styles.message_info}>
                             <div className={styles.message_name}>
                                 <span>{message.name}</span>
-                                <span className={styles.message_time}><a onClick={(e) => this.repeatMessage(message.id, message.name)}>回复</a> {tools.getDateString(message.createTime)}</span>
+                                <span className={styles.message_time}><a onClick={(e) => this.repeatMessage(message.id, message.name)}>回复</a> {getDateString(message.createTime)}</span>
                             </div>
                             <div className={styles.message_content} dangerouslySetInnerHTML={{__html:emojione.toImage(message.content)}}>
                             </div>

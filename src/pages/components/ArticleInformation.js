@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import Link from 'umi/link'
-import tools from '../../common/Tools'
+import {getDateString} from '../../common/Tools'
 import {Icon} from 'antd'
 class ArticleInformation extends Component {
     constructor(props) {
@@ -30,7 +30,7 @@ class ArticleInformation extends Component {
         const isLink = this.props.isLink;
         const time = this.getIconDom(
             <React.Fragment>
-                <Icon type="clock-circle" theme="filled" />{tools.getDateString(article.article_date)}
+                <Icon type="clock-circle" theme="filled" />{getDateString(article.article_date)}
             </React.Fragment>,
             isLink ? `article?id=${id}` : ''
         )

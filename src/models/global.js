@@ -1,8 +1,8 @@
 import request from '../common/request';
-import Tools from '../common/Tools'
+import {isPc, getLimit, deepArrayFind} from '../common/Tools'
 const localAnimationSwitch = localStorage.getItem('animationSwitch'); 
 const localEmojiSwitch = localStorage.getItem('emojiSwitch'); 
-const defaultEmojiSwitch = Tools.isPc() ? true : false;
+const defaultEmojiSwitch = isPc() ? true : false;
 export default {
 	namespace: 'global',
 	state: {
@@ -44,8 +44,6 @@ export default {
 			}
 		},
 		setSetting(state, { payload: { setting } }){
-			console.log('=cccc');
-			
 			return{
 				...state,
 				setting:{
@@ -62,7 +60,7 @@ export default {
 			let messages = article.messages;
 			
 			if(message.reply != null){
-				const targetMessage = Tools.deepArrayFind(messages, 'son', function(obj){
+				const targetMessage = deepArrayFind(messages, 'son', function(obj){
 					return obj.id == message.reply
 				})
 				if(targetMessage.son){
@@ -84,7 +82,7 @@ export default {
 			
 			if(message.reply != null){
 				//回复留言
-				const targetMessage = Tools.deepArrayFind(messages, 'son', function(obj){
+				const targetMessage = deepArrayFind(messages, 'son', function(obj){
 					return obj.id == message.reply
 				})
 				if(targetMessage.son){
@@ -132,7 +130,7 @@ export default {
 	},
 	effects: {
 		*getArticles({ payload = {} }, { select, call, put }) {
-			const {limit= Tools.getLimit(), offset= 0} = payload;
+			const {limit= getLimit(), offset= 0} = payload;
 			const isLoadding = yield select(state => state.global.isLoadding);
 			if(isLoadding){
 				return;

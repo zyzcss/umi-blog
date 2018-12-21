@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'dva';
 import styles from './index.css'
-import request from '../../common/request'
 import animation from '../../common/animation';
 import Article from '../components/Article'
 import Loadding from '../components/Loadding'
+import Paging from '../components/Paging'
 const colorBoard = ['#6F706F','#559A3C','#F69997','#F36D6A','#FFE581','#FFE066','#5F9FB9','#3787A8','#8ACCC0','#70C1B3','#DC5754']
 class Tag extends Component {
     constructor(props) {
         super(props);
         this.state = {  
             searchText:'',
-            searchEnd:false
         }
         this.search = this.search.bind(this)
         this.searchTag = this.searchTag.bind(this);
@@ -28,51 +27,20 @@ class Tag extends Component {
             searchText:e.target.value
         })
     }
-    async search(){
+    search(){
         const searchText = this.state.searchText;
         if(!searchText && searchText.trim() === ''){
             return
         }
         const { dispatch } = this.props;
 		dispatch({
-            type: 'class/search',
+            type: 'class/getSearchByText',
             payload:{
-                searchLoadding:true,
-                searchList:[]
+                searchText
             }
         });
-        this.setState({
-            searchEnd:false
-        })
-        const response = await request({
-			method: 'GET',
-			url: `/search/${searchText}`,
-        });
-        if(response['data'] && response['data'].length > 0){
-            dispatch({
-                type: 'class/search',
-                payload:{
-                    searchLoadding:false,
-                    searchList:response['data']
-                }
-            });
-        }else{
-            dispatch({
-                type: 'class/search',
-                payload:{
-                    searchLoadding:false,
-                    searchList:[]
-                }
-            });
-            this.setState({
-                searchEnd:true
-            })
-        }
     }
-    async searchTag (id){
-        this.setState({
-            searchEnd:false
-        })
+    searchTag (id){
         const { dispatch } = this.props;
 		dispatch({
             type: 'class/getSearch',
@@ -81,14 +49,24 @@ class Tag extends Component {
             }
 		});
     }
+    changePage = (isNext) =>{
+        const { dispatch } = this.props;
+		dispatch({
+			type: 'class/changPage',
+			payload:{
+				isNext
+			}
+		});
+		window.scrollTo(0,200);
+    }
     componentDidUpdate(preProp){
 		if(preProp.searchList !== this.props.searchList && this.props.searchList.length > 0){
             animation.showScrollAnimation();
 		}
 	}
     render() { 
-        const {searchFail,searchEnd} = this.state;
-        const {searchList,searchLoadding, tags,minCount,sumCount} = this.props;
+        const {searchFail} = this.state;
+        const {searchList, searchLoadding, tags, minCount, sumCount, current, count, searchEnd} = this.props;
         const articles = searchList.map((article,index)=> <Article article={article} key={index}/>)
         const tagsWord = tags.map((tag) => {
             const multiple = (tag['count'] - minCount)/sumCount;
@@ -100,6 +78,8 @@ class Tag extends Component {
                 {tag['tag.name']}({tag['count']})
             </span>)
         }) 
+        console.log('==',current,count);
+        
         return ( 
             <React.Fragment> 
                 <div className="common-content">
@@ -129,18 +109,26 @@ class Tag extends Component {
                     <Loadding loadding={searchLoadding} fail={searchFail}/>
                 </div>
                 {articles}
+                <Paging 
+                    changePage= {(isNext) =>this.changePage(isNext)}
+					current= {current}
+					count= {count}
+                />
             </React.Fragment>
         );
     }
 }
 function mapStateToProps(state) {
-	const { searchLoadding,searchList,tags,minCount,sumCount } = state.class;
+	const { searchLoadding, searchList, tags, minCount, sumCount, current, count, searchEnd} = state.class;
 	return {
         searchLoadding,
         searchList,
         tags,
         minCount,
-        sumCount
+        sumCount,
+        current,
+        count,
+        searchEnd
 	};
 }
 export default connect(mapStateToProps)(Tag);

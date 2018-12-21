@@ -1,24 +1,29 @@
 import request from '../../common/request';
 import {getLimit} from '../../common/Tools';
+const limit = getLimit();
 export default {
 	namespace: 'class',
 	state: {
 		searchLoadding:false,
 		searchList:[],
+		allSearchList:[],
 		tags:[],
+		searchEnd:false,
 		minCount:-1,
 		sumCount:-1,
-		limit: getLimit(),
         offset: 0,
 		current: 0,
 		count:0,
 	},
 	reducers: {
-		search(state, { payload: { searchLoadding,searchList } }) {
+		search(state, { payload: { searchLoadding,allSearchList = [] } }) {
+			const start = state.current * limit;
 			return {
 				...state,
 				searchLoadding,
-				searchList
+				searchList: allSearchList.slice(start, start + limit),
+				allSearchList,
+				count: Math.ceil(allSearchList.length / limit) - 1
 			}
 		},
 		setTags(state, { payload: { tags, minCount ,sumCount } }) {
@@ -29,16 +34,45 @@ export default {
 				sumCount
 			}
 		},
+		setSearchEnd(state, { payload: {searchEnd } }){
+			return {
+				...state,
+				searchEnd
+			}
+		},
+		changPage(state, { payload: {isNext}}){
+			let current = state.current;
+			if(isNext == 1){
+				current++;
+				current = Math.min(current, state.count);
+			}else{
+				current--;
+				current = Math.max(current, 0);
+			}
+			const start = current * limit;
+			console.log(current);
+			
+			return{
+				...state,
+				current,
+				searchList: state.allSearchList.slice(start, start + limit),
+			}
+		}
 	},
 	effects: {
 		*getSearch({payload}, { call, put }) {
 			yield put({
 				type: 'search',
 				payload: {
-					searchLoadding:true,
-					searchList: []
+					searchLoadding:true
 				}
 			});
+			yield put({
+				type: 'setSearchEnd',
+				payload:{
+					searchEnd:false
+				}
+			})
 			const response = yield call(request, {
 				method: 'GET',
 				url: '/searchTag/'+payload.id,
@@ -48,7 +82,7 @@ export default {
 					type: 'search',
 					payload: {
 						searchLoadding:false,
-						searchList: response.data
+						allSearchList: response.data
 					}
 				});
 			}
@@ -79,6 +113,44 @@ export default {
 					});
 				}
 			}
+		},
+		*getSearchByText({payload}, { call, put }) {
+			const {searchText} = payload;
+			console.log(searchText);
+			yield put({
+				type: 'search',
+				payload: {
+					searchLoadding:true
+				}
+			});
+			yield put({
+				type: 'setSearchEnd',
+				payload:{
+					searchEnd:false
+				}
+			})
+			const response = yield call(request, {
+				method: 'GET',
+				url: `/search/${searchText}`,
+			});
+			let allSearchList = [];
+			if(response['data'] && response['data'].length > 0){
+				allSearchList = response['data']
+			}else{
+				yield put({
+					type: 'setSearchEnd',
+					payload:{
+						searchEnd:true
+					}
+				})
+			}
+			yield put({
+				type: 'search',
+				payload:{
+					searchLoadding:false,
+					allSearchList
+				}
+			})
 		},
 		throwError() {
 			throw new Error('hi error');
