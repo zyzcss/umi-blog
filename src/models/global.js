@@ -53,30 +53,6 @@ export default {
 			}
 		},
 		setMessage(state, { payload: { message } }){
-			/* const articles = state.articles;
-			const articleIndex = articles.findIndex((article)=> article.id = articleId);
-			const article = {...articles[articleIndex]};
-			console.log(article,articleIndex,articleId,articles);
-			let messages = article.messages;
-			
-			if(message.reply != null){
-				const targetMessage = deepArrayFind(messages, 'son', function(obj){
-					return obj.id == message.reply
-				})
-				if(targetMessage.son){
-					targetMessage.son.push(message);
-				}else{
-					targetMessage.son = [message]
-				}
-			}else{
-				console.log('====');
-				messages = [...messages,message]
-			}
-			article.messages = messages;
-			return{
-				...state,
-				articles:[...articles.slice(0, articleIndex), article, ...articles.slice(articleIndex + 1)]
-			} */
 			const currentArticle = state.currentArticle;
 			let messages = currentArticle.messages;
 			
@@ -85,6 +61,9 @@ export default {
 				const targetMessage = deepArrayFind(messages, 'son', function(obj){
 					return obj.id == message.reply
 				})
+				if(!targetMessage){
+					window.location.reload();
+				}
 				if(targetMessage.son){
 					targetMessage.son.push(message);
 				}else{
@@ -92,13 +71,13 @@ export default {
 				}
 			}else{
 				//回复文章
-				messages = [...messages,message]
+				messages = messages.push(message);
 			}
 			return{
 				...state,
 				currentArticle:{
 					...currentArticle,
-					messages,
+					messages:[...messages],
 				}
 			}
 		},

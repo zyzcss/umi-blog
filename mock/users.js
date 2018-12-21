@@ -334,9 +334,10 @@ export default {
                 "name": "test",
                 "type": 0,
                 "articleid": 4,
-                "content": "test<a href=\"#message6\">@&lt;div&gt;zzz&lt;/div&gt;</a>&lt;name&gt;&lt;div&gt;",
+                "content": "test<a href=\"localhost:8000/#/article?id=6#message6\">@&lt;div&gt;zzz&lt;/div&gt;</a>&lt;name&gt;&lt;div&gt;",
                 "imgUrl": "/corver/user.png",
                 "isAudit": 0,
+                "reply":5,
                 "createTime": "2018-11-02T08:50:50.404Z"
             })
         },1900)

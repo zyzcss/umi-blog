@@ -80,8 +80,7 @@ exports.isPc = function () {
 
 exports.deepArrayFind = function(array, ifNameDeep, checkFn){
     const result = deepArray(array, ifNameDeep, checkFn);
-    console.log(result);
-    
+    return result;
 }
 
 function deepArray(array, ifNameDeep, checkFn){
@@ -101,4 +100,12 @@ function deepArray(array, ifNameDeep, checkFn){
 
 exports.getLimit = function(){
     return 5;
+}
+
+exports.getUrlExceptMessage = function(){
+    let url = window.location.href;
+    if(url.indexOf('#') != url.lastIndexOf('#')){
+        url = url.slice(0, url.lastIndexOf('#'))
+    }
+    return url;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Input, Checkbox, Button, Form ,Divider} from 'antd'
 import { connect } from 'dva';
-import {getDateString, scollToTop} from '../../common/Tools.js'
+import {getDateString, scollToTop, getUrlExceptMessage} from '../../common/Tools.js'
 import request from '../../common/request.js'
 import emojione from 'emojione'
 import styles from './Message.css'
@@ -24,7 +24,7 @@ const formItemLayout2 = {
         xs: { span: 24 },
     },
 };
-
+let articleURL;
 class Message extends Component {
     constructor(props) {
         super(props);
@@ -55,6 +55,7 @@ class Message extends Component {
                 home
             })
         }
+        articleURL = getUrlExceptMessage();
     }
     getMessageDom(messages, level = 0){
         const {messageRenderId} = this.state;
@@ -168,13 +169,20 @@ class Message extends Component {
     }
     async sendMessageRequest(data){
         const { dispatch } = this.props;
+        const {messageRenderId} = this.state;
         this.setState({
             sendLoadding:true
         })
         const response = await request({
             method: 'POST',
             url: '/message',
-            data
+            data:{
+                message:{
+                    ...data,
+                    articleid:this.props.articleId,
+                    reply:messageRenderId != -1 ? messageRenderId : null
+                }
+            }
         });
         this.setState({
             sendLoadding:false
