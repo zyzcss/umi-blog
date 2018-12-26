@@ -103,9 +103,14 @@ exports.getLimit = function(){
 }
 
 exports.getUrlExceptMessage = function(){
-    let url = window.location.href;
-    if(url.indexOf('#') != url.lastIndexOf('#')){
-        url = url.slice(0, url.lastIndexOf('#'))
+    let url = window.location.href,
+        index1 = url.indexOf('#'),
+        index2 = url.lastIndexOf('#');
+    let result = '';
+    if(index1 != index2){
+        result = url.slice(index1 - 1, index2)
+    }else{
+        result = url.slice(index1 - 1)
     }
-    return url;
+    return result;
 }

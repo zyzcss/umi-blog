@@ -6,6 +6,13 @@ import { connect } from 'dva';
 import Message from './Message.js'
 import Tag from './Tag.js'
 import ArticleInformation from './ArticleInformation'
+function herfChange(e){
+    const url = location.href.slice(location.href.lastIndexOf('#'))
+    if(url.startsWith('#message')){
+        const target = document.getElementById(url.slice(1));
+        if(target)scollToTop(target);
+    }
+}
 class ArticleContent extends Component {
     constructor(props) {
         super(props);
@@ -28,6 +35,12 @@ class ArticleContent extends Component {
                 isRender: true
             })
         }
+    }
+    componentDidMount(){
+        window.addEventListener('hashchange',herfChange,false);
+    }
+    componentWillUnmount(){
+        window.removeEventListener('hashchange',herfChange)
     }
     scrollToMessage = (url) => {
         const target = document.getElementById(url);

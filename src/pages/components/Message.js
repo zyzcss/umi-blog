@@ -67,7 +67,7 @@ class Message extends Component {
                         <img className={styles.message_corver} src={message.imgUrl} alt={message.name}/>
                         <div className={styles.message_info}>
                             <div className={styles.message_name}>
-                                <span>{message.name}</span>
+                                <span>{message.home ? <a href={message.home}>{message.name}</a>: message.name}</span>
                                 <span className={styles.message_time}><a onClick={(e) => this.repeatMessage(message.id, message.name)}>回复</a> {getDateString(message.createTime)}</span>
                             </div>
                             <div className={styles.message_content} dangerouslySetInnerHTML={{__html:emojione.toImage(message.content)}}>
@@ -223,7 +223,7 @@ class Message extends Component {
     repeatMessage = (messageRenderId, username) =>{
         const {setFieldsValue} = this.props.form;
         setFieldsValue({
-            content:`<a href="#message${messageRenderId}">@${username}</a>`
+            content:`<a href="${articleURL}#message${messageRenderId}">@${username}</a>`
         })
         this.setState({
             messageRenderId

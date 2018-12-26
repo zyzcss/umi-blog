@@ -55,7 +55,7 @@ export default {
 		setMessage(state, { payload: { message } }){
 			const currentArticle = state.currentArticle;
 			let messages = currentArticle.messages;
-			
+
 			if(message.reply != null){
 				//回复留言
 				const targetMessage = deepArrayFind(messages, 'son', function(obj){
@@ -71,7 +71,7 @@ export default {
 				}
 			}else{
 				//回复文章
-				messages = messages.push(message);
+				messages.push(message);
 			}
 			return{
 				...state,

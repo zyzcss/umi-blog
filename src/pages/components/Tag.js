@@ -12,7 +12,7 @@ class Tag extends Component {
     searchTag (id){
         const { dispatch } = this.props;
 		dispatch({
-            type: 'global/getSearch',
+            type: 'class/getSearch',
             payload:{
                 id
             }
