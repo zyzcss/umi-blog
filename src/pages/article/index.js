@@ -27,10 +27,8 @@ class Article extends Component {
                 method: 'GET',
                 url: '/article/' + id,
             }); */
-        }else{
-            //ajax请求后台获取
-            this.getArticle(id);
         }
+        this.getArticle(id);
     }
     async getArticle(id){
 		const data = await request({

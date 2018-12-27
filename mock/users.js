@@ -248,7 +248,7 @@ export default {
                         ]}
                     ]
                 },
-            {"id":4,"name":"4","home":"sadsa","articleid":4,"imgUrl":null,"content":"vvv","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-26T05:48:22.000Z"},
+            {"id":4,"name":"4","home":null,"articleid":4,"imgUrl":null,"content":"vvv","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-26T05:48:22.000Z"},
             {"id":5,"name":"5","home":null,"articleid":4,"imgUrl":null,"content":"&lt;div&gt;asd&lt;/div&gt;","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-28T14:12:56.000Z"},
             {"id":6,"name":"6","home":null,"articleid":4,"imgUrl":null,"content":"&lt;div&gt;asd&lt;/div&gt;","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-28T14:12:56.000Z"}],"comment":6})
         },100)
@@ -334,10 +334,11 @@ export default {
                 "name": "test",
                 "type": 0,
                 "articleid": 4,
-                "content": "test<a href=\"localhost:8000/#/article?id=6#message6\">@&lt;div&gt;zzz&lt;/div&gt;</a>&lt;name&gt;&lt;div&gt;",
+                "content": "test<a href=\"/#/article?id=6#message6\">@&lt;div&gt;zzz&lt;/div&gt;</a>&lt;name&gt;&lt;div&gt;",
                 "imgUrl": "/corver/user.png",
                 "isAudit": 0,
-                "reply":5,
+                'home':'http://www.baidu.com',
+                "reply":null,
                 "createTime": "2018-11-02T08:50:50.404Z"
             })
         },1900)

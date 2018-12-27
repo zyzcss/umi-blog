@@ -13,6 +13,8 @@
     display: block;
     padding: 5px;
     border: 1px solid #ccc;
+    font-size: 10px;
+    overflow: hidden;
 }
 .message_wrap > .message_divider{
     margin: 12px 0;
