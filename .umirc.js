@@ -7,20 +7,18 @@ export default {
       antd: true,
       dva: true,
       dynamicImport: false,
-      title: 'umi-demo',
+      title: 'blog',
       dll: false,
-      pwa: false,
+      hardSource: false,
       routes: {
         exclude: [
-          /model\.(j|t)sx?$/,
-          /service\.(j|t)sx?$/,
-          /models\//,
-          /components\//,
-          /services\//,
+          /components/,
         ],
       },
-      hardSource: false,
     }],
   ],
-  history: 'hash'
+  history: 'hash',
+  targets: {
+    ie: 10,
+  },
 }
