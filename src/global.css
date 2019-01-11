@@ -33,7 +33,7 @@ a:visited, a:link,a:hover,a:active{
     transform: translateY(0) scale(1);
   }
   to {
-    transform: translateY(-1rem) scale(0.8);
+    transform: translateY(-12px) scale(0.8);
   }
 }
 .loadding-container{

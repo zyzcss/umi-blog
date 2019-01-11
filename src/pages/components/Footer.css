@@ -11,10 +11,7 @@
     height:20px;
     line-height:20px;
 }
-.link_container p {
-    float:left;
-    height:20px;
-    line-height:20px;
+.link_container span {
     margin: 0px 0px 0px 5px; 
     color:#939393;
 }

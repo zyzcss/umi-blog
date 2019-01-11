@@ -18,7 +18,7 @@ class Foter extends Component {
                             href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010802009578" 
                             className={styles.link_container}>
                             <img src={beianIcon} style={{float:'left'}}/>
-                            <p>浙公网安备 33010802009578号</p>
+                            <span>浙公网安备 33010802009578号</span>
                         </a>
                     </Col>
                     <Col span={12} style={{textAlign:'left',paddingLeft:10}}>
