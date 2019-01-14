@@ -19,11 +19,11 @@ class Article extends Component {
             <div 
             className={setting.animationSwitch ? styles.container + " index-article" : styles.container + " index-article index-article-show"} 
             >
-                <div className={styles.title} title={article.article_title}><Link to={`article?id=${article.id}`}>{article.article_title}</Link></div>
+                <Link to={`article?id=${article.id}`}><div className={styles.title} title={article.article_title}>{article.article_title}</div></Link>
                 {article.article_corver ?
                 <Link to={`article?id=${article.id}`}><img className={styles.corver} src={article.article_corver} alt={article.article_title}/></Link>
                 : ''}
-                <div className={styles.describe}>{describe}</div>
+                <Link to={`article?id=${article.id}`}><div className={styles.describe}>{describe}</div></Link>
                 <div className={styles.icons}>
                     <ArticleInformation article={article} isLink={true}/>
                     <Tag article_tags={article.article_tags}/>

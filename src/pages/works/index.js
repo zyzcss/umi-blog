@@ -33,19 +33,25 @@ class Works extends Component {
         const works = articles.filter((article) => article.article_type === 1);
 		const Articles = works.map((article,index) => 
 			<Article article={article} key={index} />
-		)
+        )
+        const loadding = !this.props.articles || this.props.articles.length === 0;
         return ( 
             <React.Fragment> 
-                <div className="loadding-container">
-                    <Loadding loadding={!this.props.articles || this.props.articles.length == 0}/>
-                    {!works || works.length == 0 && this.props.articles.length > 0 
-                    ?
-                    (<div className="common-content">
-                        <div className="common-content-title">未搜索到相关数据</div>
-                    </div>)
-                    :Articles
-                    }
+                <div 
+                    className="loadding-container"
+                    style={{
+						height: loadding ? '50px' : '0px'
+					}}
+                    >
+                    <Loadding loadding={loadding}/>
                 </div>
+                {!works || works.length === 0 && this.props.articles.length > 0 
+                ?
+                (<div className="common-content">
+                    <div className="common-content-title">未搜索到相关数据</div>
+                </div>)
+                :Articles
+                }
             </React.Fragment>
         );
     }

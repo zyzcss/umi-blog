@@ -8,8 +8,8 @@
 .container a{
     color: black;
 }
-.container > .title{
-    display: inline-block;
+.container .title{
+    word-break: break-all;
     font-size: 20px;
     margin: 1.2rem 0;
     font-weight: bold;
@@ -21,25 +21,25 @@
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
     margin-bottom: 1.2rem;
 }
-.container > .describe{
+.container .describe{
     margin-bottom: 1.2rem;
 }
-.container > .describe p,
-.container > .describe h1,
-.container > .describe h2,
-.container > .describe h3,
-.container > .describe h4,
-.container > .describe h5,
-.container > .describe table,
-.container > .describe pre {
+.container .describe p,
+.container .describe h1,
+.container .describe h2,
+.container .describe h3,
+.container .describe h4,
+.container .describe h5,
+.container .describe table,
+.container .describe pre {
   margin: 10px 0;
   line-height: 1.5;
 }
-.container > .describe ul,
-.container > .describe ol {
+.container .describe ul,
+.container .describe ol {
   margin: 10px 0 10px 20px;
 }
-.container > .describe blockquote {
+.container .describe blockquote {
   display: block;
   border-left: 8px solid #d0e5f2;
   padding: 5px 10px;
@@ -48,7 +48,7 @@
   font-size: 100%;
   background-color: #f1f1f1;
 }
-.container > .describe code {
+.container .describe code {
   display: inline-block;
   *display: inline;
   *zoom: 1;
@@ -57,20 +57,20 @@
   padding: 3px 5px;
   margin: 0 3px;
 }
-.container > .describe pre code {
+.container .describe pre code {
   display: block;
 }
-.container > .describe table {
+.container .describe table {
   border-top: 1px solid #ccc;
   border-left: 1px solid #ccc;
 }
-.container > .describe table td,
-.container > .describe table th {
+.container .describe table td,
+.container .describe table th {
   border-bottom: 1px solid #ccc;
   border-right: 1px solid #ccc;
   padding: 3px 5px;
 }
-.container > .describe table th {
+.container .describe table th {
   border-bottom: 2px solid #ccc;
   text-align: center;
 }

@@ -1,5 +1,5 @@
 import { connect } from 'dva';
-import { Component } from 'react';
+import React,{ Component } from 'react';
 import Article from '../components/Article';
 import Loadding from '../components/Loadding';
 import animation from '../../common/animation';
@@ -38,9 +38,9 @@ class App extends Component {
 		const Articles = articles.map((article,index) => 
 			<Article article={article} key={index} />
 		)
-		const loadding = !articles || articles.length == 0;
+		const loadding = !articles || articles.length === 0;
 		return (
-			<div>
+			<React.Fragment>
 				<div 
 					className="loadding-container" 
 					style={{
@@ -55,7 +55,7 @@ class App extends Component {
 					current= {current}
 					count= {count}
 				/>
-			</div>
+			</React.Fragment>
 		);
 	}
 }
