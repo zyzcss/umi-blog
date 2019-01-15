@@ -227,17 +227,20 @@ articles[1] = {
 }
 export default {
     'GET /articles': (req, res) => {
-        const article = req.query.offset == 0 ? articles[0] : articles[1]
+        const article = req.query.offset === 0 ? articles[0] : articles[1]
         setTimeout(() => {
             /* res.writeHead(400, {'Content-Type': 'text/plain'});
             res.write('Error 400:resource not found');
             res.end(); */
-            res.json(article)
+            res.json({
+                code:200,
+                data:article
+            })
         },1000)
     },
     'GET /article/*': (req, res) => {
         setTimeout(() => {
-            res.json({"id":4,"article_title":"wlp dswlp","article_describe":"测试","article_corver":"uploads/1540387887946.jpg","article_date":"2018-10-24T13:33:03.000Z","article_content":"<p>😀😱😉😋<img src=\"uploads/1540387887946.jpg\" style=\"max-width: 100%;\"><br></p>","article_click":19,"article_type":0,
+            res.json({code:200,data:{"id":4,"article_title":"wlp dswlp","article_describe":"测试","article_corver":"uploads/1540387887946.jpg","article_date":"2018-10-24T13:33:03.000Z","article_content":"<p>😀😱😉😋<img src=\"uploads/1540387887946.jpg\" style=\"max-width: 100%;\"><br></p>","article_click":19,"article_type":0,
             "article_tags":[{"id":7,"articleid":4,"tagid":1,"tag":{"id":1,"name":"node"}}],
             "messages":[
                 {"id":1,"name":"1","home":"www.zyzcss.xyz","articleid":4,"imgUrl":null,"content":"asddassad","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-26T05:48:22.000Z",
@@ -250,7 +253,7 @@ export default {
                 },
             {"id":4,"name":"4","home":null,"articleid":4,"imgUrl":null,"content":"vvv","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-26T05:48:22.000Z"},
             {"id":5,"name":"5","home":null,"articleid":4,"imgUrl":null,"content":"&lt;div&gt;asd&lt;/div&gt;","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-28T14:12:56.000Z"},
-            {"id":6,"name":"6","home":null,"articleid":4,"imgUrl":null,"content":"&lt;div&gt;asd&lt;/div&gt;","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-28T14:12:56.000Z"}],"comment":6})
+            {"id":6,"name":"6","home":null,"articleid":4,"imgUrl":null,"content":"&lt;div&gt;asd&lt;/div&gt;","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-28T14:12:56.000Z"}],"comment":6}})
         },100)
     },
     'POST /api/user': (req, res) => {
@@ -263,7 +266,7 @@ export default {
     },
      'GET /search/*':(req,res) =>{
         setTimeout(() => {
-            res.json([{"id":4,"article_title":"wlp dswlp","article_describe":"测试","article_corver":"uploads/1540387887946.jpg","article_date":"2018-10-24T13:33:03.000Z","article_content":"<p>😀😱😉😋<img src=\"uploads/1540387887946.jpg\" style=\"max-width: 100%;\"><br></p>","article_click":19,"article_type":0,
+            res.json({code:200, data:[{"id":4,"article_title":"wlp dswlp","article_describe":"测试","article_corver":"uploads/1540387887946.jpg","article_date":"2018-10-24T13:33:03.000Z","article_content":"<p>😀😱😉😋<img src=\"uploads/1540387887946.jpg\" style=\"max-width: 100%;\"><br></p>","article_click":19,"article_type":0,
             "article_tags":[{"id":7,"articleid":4,"tagid":1,"tag":{"id":1,"name":"node"}}],
             "messages":[
                 {"id":1,"name":"1","home":"www.zyzcss.xyz","articleid":4,"imgUrl":null,"content":"asddassad","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-26T05:48:22.000Z",
@@ -276,12 +279,12 @@ export default {
                 },
             {"id":4,"name":"4","home":"sadsa","articleid":4,"imgUrl":null,"content":"vvv","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-26T05:48:22.000Z"},
             {"id":5,"name":"5","home":null,"articleid":4,"imgUrl":null,"content":"&lt;div&gt;asd&lt;/div&gt;","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-28T14:12:56.000Z"},
-            {"id":6,"name":"6","home":null,"articleid":4,"imgUrl":null,"content":"&lt;div&gt;asd&lt;/div&gt;","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-28T14:12:56.000Z"}],"comment":6}])
+            {"id":6,"name":"6","home":null,"articleid":4,"imgUrl":null,"content":"&lt;div&gt;asd&lt;/div&gt;","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-28T14:12:56.000Z"}],"comment":6}]})
         },100)
     }, 
     'GET /tags':(req,res) =>{
         setTimeout(() => {
-            res.json({
+            res.json({code:200,data:{
                 id:0,
                 article_title:'敖德萨大所多阿树大师大师大师大师大师打打阿树大师',
                 article_describe:'Cloudflare异常缓慢： Cloudflare因为支持Websocket，导致今年都快要被一些玩家给玩坏了，博主这两天在折腾Cloudflare CDN，不过并非用于那些奇技淫巧，仅仅是为了节省网站宽带，在使用过程中我发现Clou',
@@ -292,12 +295,12 @@ export default {
                 article_content:'asdadasdasdasdasdasasdadasdasdasdasdasasdadasdasdasdasdasasdadasdasdasdasdas\r\nasdasdasds<img src="asdasda.com"/><br/>',
                 article_click:100,
                 article_type:0,
-            })
+            }})
         },100)
     },
     'GET /hottags':(req,res) =>{
         setTimeout(() => {
-            res.json([{"id":1,"articleid":1,"tagid":1,"tag.id":1,"tag.name":"node","count":"2"},
+            res.json({code:200, data:[{"id":1,"articleid":1,"tagid":1,"tag.id":1,"tag.name":"node","count":"2"},
             {"id":2,"articleid":1,"tagid":2,"tag.id":2,"tag.name":"react","count":"3"},
             {"id":4,"articleid":3,"tagid":3,"tag.id":3,"tag.name":"mysql","count":"1"},
             {"id":5,"articleid":3,"tagid":3,"tag.id":3,"tag.name":"mysql1","count":"4"},
@@ -307,12 +310,12 @@ export default {
             {"id":9,"articleid":3,"tagid":3,"tag.id":3,"tag.name":"mysql3","count":"8"},{"id":10,"articleid":1,"tagid":1,"tag.id":1,"tag.name":"node9","count":"2"},
             {"id":12,"articleid":1,"tagid":2,"tag.id":2,"tag.name":"react4","count":"9"},
             {"id":14,"articleid":3,"tagid":3,"tag.id":3,"tag.name":"mysql5","count":"2"},
-            {"id":18,"articleid":3,"tagid":3,"tag.id":3,"tag.name":"mysql8","count":"3"}])
+            {"id":18,"articleid":3,"tagid":3,"tag.id":3,"tag.name":"mysql8","count":"3"}]})
         },100)
     },
     'GET /searchTag/*':(req,res) =>{
         setTimeout(() => {
-            res.json([{
+            res.json({code:200,data:[{
                 id:0,
                 article_title:'敖德萨大所多阿树大师大师大师大师大师打打阿树大师',
                 article_describe:'Cloudflare异常缓慢： Cloudflare因为支持Websocket，导致今年都快要被一些玩家给玩坏了，博主这两天在折腾Cloudflare CDN，不过并非用于那些奇技淫巧，仅仅是为了节省网站宽带，在使用过程中我发现Clou',
@@ -323,12 +326,12 @@ export default {
                 article_content:'asdadasdasdasdasdasasdadasdasdasdasdasasdadasdasdasdasdasasdadasdasdasdasdas\r\nasdasdasds<img src="asdasda.com"/><br/>',
                 article_click:100,
                 article_type:0,
-            }])
+            }]})
         },100)
     },
     'POST /message':(req,res) =>{
         setTimeout(() => {
-            res.json({
+            res.json({code:200,data:{
                 "id": 23,
                 "email": "yzoli@163.com",
                 "name": "test",
@@ -340,7 +343,7 @@ export default {
                 'home':'http://www.baidu.com',
                 "reply":null,
                 "createTime": "2018-11-02T08:50:50.404Z"
-            })
+            }})
         },1900)
     }
 }

@@ -1,6 +1,6 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
 import Link from 'umi/link'
-import {getDateString} from '../../common/Tools'
+import {getDateString} from '../../common/tools'
 import {Icon} from 'antd'
 class ArticleInformation extends Component {
     constructor(props) {

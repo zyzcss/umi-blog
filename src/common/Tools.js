@@ -56,7 +56,7 @@ function getElementTop(elem){
         elemTop+=elem.offsetTop;
         elem=elem.offsetParent;
     }
-    console.log(elemTop);
+    console.log('元素高度',elemTop);
     
     return elemTop;
 }

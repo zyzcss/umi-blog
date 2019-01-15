@@ -1,5 +1,5 @@
 import request from '../common/request';
-import {isPc, getLimit, deepArrayFind} from '../common/Tools'
+import {isPc, deepArrayFind} from '../common/tools'
 const localAnimationSwitch = localStorage.getItem('animationSwitch'); 
 const localEmojiSwitch = localStorage.getItem('emojiSwitch'); 
 const defaultEmojiSwitch = isPc() ? true : false;
@@ -29,14 +29,18 @@ export default {
 	},
 	reducers: {
 		setArticles(state, { payload: { articles, count, limit, offset } }) {
-			let allArticles = state.allArticles;
-			if(limit + offset >= count){
+			let allArticles = [...state.allArticles];
+			for (let i = 0; i < articles.length; i++) {
+				allArticles[i + offset] = articles[i];
+			}
+			/* if(limit + offset >= count){
 				//头+尾
 				allArticles = [...allArticles.slice(0, offset), ...articles]
 			}else{
 				//头+中+尾
 				allArticles = [...allArticles.slice(0, offset), ...articles, ...allArticles.slice(offset + limit)] 
 			}
+			console.log([...allArticles],articles); */
 			return {
 				...state,
 				articles,
@@ -59,7 +63,7 @@ export default {
 			if(message.reply != null){
 				//回复留言
 				const targetMessage = deepArrayFind(messages, 'son', function(obj){
-					return obj.id == message.reply
+					return obj.id === message.reply
 				})
 				if(!targetMessage){
 					window.location.reload();
@@ -97,7 +101,7 @@ export default {
 			const {allArticles} = state
 			let articles;
 			if(allArticles[offset]){
-				articles = allArticles.slice(offset, offset + limit)
+				articles = [...allArticles.slice(offset, offset + limit)];
 			}else{
 				articles = [];
 			}
@@ -109,7 +113,8 @@ export default {
 	},
 	effects: {
 		*getArticles({ payload = {} }, { select, call, put }) {
-			const {limit= getLimit(), offset= 0} = payload;
+			const state = yield select(state => state.index);
+			const {limit= state.limit, offset= state.offset} = payload;
 			const isLoadding = yield select(state => state.global.isLoadding);
 			if(isLoadding){
 				return;
@@ -131,14 +136,16 @@ export default {
 				method: 'GET',
 				url: `/articles?limit=${limit}&offset=${offset}`,
 			});
-			if(response['data']){
-				const {articles, count} = response.data;
+			
+			if(response.code === 200){
+				const {articles, count} = response['data'];
 				yield put({
 					type: 'setArticles',
 					payload: {
 						...payload,
 						articles,
-						count 
+						count ,
+						offset
 					}
 				});
 				yield put({

@@ -1,13 +1,13 @@
 import React,{ Component } from 'react';
 import styles from './Article.css'
-import {scollToTop} from '../../common/Tools'
+import {scollToTop} from '../../common/tools'
 import emojione from 'emojione'
 import { connect } from 'dva';
 import Message from './Message.js'
 import Tag from './Tag.js'
 import ArticleInformation from './ArticleInformation'
 function herfChange(e){
-    const url = location.href.slice(location.href.lastIndexOf('#'))
+    const url = window.location.href.slice(window.location.href.lastIndexOf('#'))
     if(url.startsWith('#message')){
         const target = document.getElementById(url.slice(1));
         if(target)scollToTop(target);
@@ -22,7 +22,7 @@ class ArticleContent extends Component {
     }
     componentDidUpdate(){
         if(!this.state.isRender && this.props.article.id){
-            const url = location.href.slice(location.href.lastIndexOf('#'))
+            const url = window.location.href.slice(window.location.href.lastIndexOf('#'))
             if(!url.startsWith('#message')){
                 //没有message锚点
                 //tools.scollToTop();

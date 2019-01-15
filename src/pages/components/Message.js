@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Input, Checkbox, Button, Form ,Divider} from 'antd'
 import { connect } from 'dva';
-import {getDateString, scollToTop, getUrlExceptMessage} from '../../common/Tools.js'
+import {getDateString, scollToTop, getUrlExceptMessage} from '../../common/tools.js'
 import request from '../../common/request.js'
 import emojione from 'emojione'
 import styles from './Message.css'
@@ -180,14 +180,14 @@ class Message extends Component {
                 message:{
                     ...data,
                     articleid:this.props.articleId,
-                    reply:messageRenderId != -1 ? messageRenderId : null
+                    reply:messageRenderId !== -1 ? messageRenderId : null
                 }
             }
         });
         this.setState({
             sendLoadding:false
         })
-        if(response['data'] && !response['data']['msg']){
+        if(response.code === 200){
             this.setState({
                 messageRenderId:-1
             })

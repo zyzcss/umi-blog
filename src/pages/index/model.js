@@ -1,5 +1,5 @@
 
-import {getLimit} from '../../common/Tools';
+import {getLimit} from '../../common/tools';
 export default {
 	namespace: 'index',
 	state: {
@@ -11,7 +11,7 @@ export default {
 	reducers: {
 		changPageReducer(state, { payload:{ isNext } }) {
 			let {limit, offset, current} = state;
-			if(isNext == 1){
+			if(isNext === 1){
 				//下一页
 				current ++ ;
 				offset += limit;

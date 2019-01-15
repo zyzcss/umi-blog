@@ -1,14 +1,11 @@
 import React,{ Component } from 'react';
 import { connect } from 'dva';
-import {getUrlString} from '../../common/Tools'
+import {getUrlString} from '../../common/tools'
 import request from '../../common/request.js'
 import ArticleContent from '../components/ArticleContent'
 import router from 'umi/router';
 
 class Article extends Component {
-    constructor(props) {
-        super(props);
-    }
     componentDidMount(){
         const id = parseInt(getUrlString('id'),10);
         const {articles, dispatch} = this.props;
@@ -35,7 +32,7 @@ class Article extends Component {
 			method: 'GET',
 			url: '/article/' + id,
         });
-        if(data && data.data && !data.data.msg){
+        if(data.code === 200){
             this.props.dispatch({
                 type: 'global/setArticle',
                 payload:{

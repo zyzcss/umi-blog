@@ -20,7 +20,7 @@ import { notification } from 'antd';
 
 // 设置全局参数，如响应超市时间，请求前缀等。
 axios.defaults.timeout = 10000
-axios.defaults.withCredentials = true;
+/* axios.defaults.withCredentials = true; */
 
 // 状态码错误信息
 const codeMessage = {
@@ -41,7 +41,7 @@ const codeMessage = {
 	504: '网关超时。',
 };
 
-axios.interceptors.request.use((config) => {
+/* axios.interceptors.request.use((config) => {
 	return config;
 }, (error) => {
 	return Promise.reject(error);
@@ -51,7 +51,7 @@ axios.interceptors.response.use((response) => {
 	return response;
 }, (error) => {
 	return Promise.reject(error);
-});
+}); */
 
 export default async function request(opt) {
 	let response;
@@ -59,12 +59,17 @@ export default async function request(opt) {
 		response = await axios(opt)
 			.then((response) => {
 				console.log(response);
-				return response;
+				return response['data'];
 			})
 			.catch((error) => {
 				console.log(error);
 				if (!error.response) {
-					return console.log('Error', error.message);
+					console.log('Error', error);
+					notification.error({
+						message: `发生错误`,
+						description: '服务器出错，请稍后重试！或联系yzdslloli@163.com询问。',
+					});
+					return { code: 500, message: '服务器错误' };
 				}
 				const status = error.response.status;
 				const errortext = codeMessage[status] || error.response.statusText;
@@ -73,12 +78,12 @@ export default async function request(opt) {
 					message: `请求错误 ${status}`,
 					description: errortext,
 				});
-				console.log(`【${opt.method} ${opt.url}】请求失败，响应数据：%o`, error.response);
+				console.log(`[${opt.method} ${opt.url}]请求失败，响应数据：%o`, error.response);
 				return { code: status, message: errortext };
 			});;
 		return response
 	} catch (err) {
 		console.log(err);
-		return response
+		return { code: 500, message: '服务器错误' };
 	}
 }

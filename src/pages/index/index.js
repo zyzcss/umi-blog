@@ -34,7 +34,7 @@ class App extends Component {
 		window.scrollTo(0,0);
 	}
 	render() {
-		const {articles, count, current} = this.props;
+		const {articles, count, current, isLoadding} = this.props;
 		const Articles = articles.map((article,index) => 
 			<Article article={article} key={index} />
 		)
@@ -54,18 +54,20 @@ class App extends Component {
 					changePage= {(isNext) =>this.changePage(isNext)}
 					current= {current}
 					count= {count}
+					enabled= {!isLoadding}
 				/>
 			</React.Fragment>
 		);
 	}
 }
 function mapStateToProps(state) {
-	const { articles } = state.global;
+	const { articles, isLoadding } = state.global;
 	const {count, current} = state.index;
 	return {
 		articles,
 		current,
-		count
+		count,
+		isLoadding
 	};
 }
 export default connect(mapStateToProps)(App);

@@ -9,5 +9,5 @@
     width: 100%;
     cursor: pointer;
     opacity: 1;
-    transition: opacity 0.5s;
+    transition: all 0.5s;
 }

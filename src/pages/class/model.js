@@ -1,5 +1,5 @@
 import request from '../../common/request';
-import {getLimit} from '../../common/Tools';
+import {getLimit} from '../../common/tools';
 const limit = getLimit();
 export default {
 	namespace: 'class',
@@ -42,7 +42,7 @@ export default {
 		},
 		changPage(state, { payload: {isNext}}){
 			let current = state.current;
-			if(isNext == 1){
+			if(isNext === 1){
 				current++;
 				current = Math.min(current, state.count);
 			}else{
@@ -50,7 +50,7 @@ export default {
 				current = Math.max(current, 0);
 			}
 			const start = current * limit;
-			console.log(current);
+			console.log('当前页数',current);
 			
 			return{
 				...state,
@@ -77,7 +77,7 @@ export default {
 				method: 'GET',
 				url: '/searchTag/'+payload.id,
 			});
-			if(response['data']){
+			if(response.code === 200){
 				yield put({
 					type: 'search',
 					payload: {
@@ -92,7 +92,7 @@ export default {
 				method: 'GET',
 				url: `/hottags`,
 			});
-			if(response['data'] && response['data'].length > 0){
+			if(response.code === 200){
 				const tags = response['data'];
 				if(tags.length > 0){
 					let min = tags[0]['count'],
@@ -134,7 +134,7 @@ export default {
 				url: `/search/${searchText}`,
 			});
 			let allSearchList = [];
-			if(response['data'] && response['data'].length > 0){
+			if(response.code === 200){
 				allSearchList = response['data']
 			}else{
 				yield put({

@@ -7,20 +7,27 @@ class Paging extends Component {
         this.state = {  }
     }
     prePage = () =>{
-        this.props.changePage(-1);
+        if(this.props.enabled){
+            this.props.changePage(-1);
+        }
     }
     nextPage = ()=>{
-        this.props.changePage(1);
+        if(this.props.enabled){
+            this.props.changePage(1);
+        }
     }
     render() { 
-        const {current = 0, count = 0} = this.props;
+        const {current = 0, count = 0, enabled} = this.props;
+        const cursor = enabled ? 'pointer' : 'wait';
         return (  
             <Row>
                 <Col md={{span:3,offset:0}} xs={{span:3,offset:1}}>
                     <div 
                         className={styles.paging_button}
                         style={{
-                            opacity: current > 0 ? 1 : 0
+                            opacity: current > 0 ? 1 : 0,
+                            visibility: current > 0 ? 'visible' : 'hidden',
+                            cursor:enabled ? 'pointer' : 'wait'
                         }}
                         onClick={this.prePage}
                     >
@@ -40,7 +47,9 @@ class Paging extends Component {
                     <div 
                         className={styles.paging_button + ' right'}
                         style={{
-                            opacity: current < count ? 1 : 0
+                            opacity: current < count ? 1 : 0,
+                            visibility: current < count ? 'visible' : 'hidden',
+                            cursor
                         }}
                         onClick={this.nextPage}
                     >

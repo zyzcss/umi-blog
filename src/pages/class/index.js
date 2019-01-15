@@ -78,8 +78,6 @@ class Tag extends Component {
                 {tag['tag.name']}({tag['count']})
             </span>)
         }) 
-        console.log('==',current,count);
-        
         return ( 
             <React.Fragment> 
                 <div className="common-content">
