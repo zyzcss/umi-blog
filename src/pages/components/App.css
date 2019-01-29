@@ -1,0 +1,200 @@
+.app{
+    cursor: pointer;
+    margin: 0 40px 20px 0;
+}
+.app > .corver{
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin: auto;
+    position: relative;
+    z-index: 0;
+}
+
+.app:hover > .name::before{
+    box-shadow: 1px 4px 7px rgba(0, 0, 0, 0.5);
+}
+
+.app > .corver > .corver_img{
+    width: 100%;height: 100%;
+    background-size: 100%, 100%;
+    background-color: #ccc;
+    border-radius: 50%;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+}
+
+.app:hover > .corver > .corver_img{
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+}
+
+.app > .name{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 16px;
+    position: relative;
+    color: #000;
+}
+
+.app > .name::before{
+    content: '';
+    width: 60%;
+    position: absolute;
+    height: 2px;
+    background: #ccc;
+    left: 0;
+    margin: auto;
+    right: 0;
+    border-radius: 50%;
+}
+
+.app > .corver > .border{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    position: absolute;
+    transition: all .3s cubic-bezier(.29,-0.15,.4,2.02);
+    visibility: hidden;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.app:hover > .corver > .border{
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.app > .corver > .border_top{
+    border-top-color: #3d82d1;
+    border-bottom-color:  #ccc;
+}
+
+.app > .corver > .border_left{
+    transition: all .5s ;
+    border-left-color: #3d82d1;
+    border-right-color: #ccc;
+}
+
+.app:hover > .corver > .border_left{
+    transform: scale(1.2);
+}
+
+.app > .corver > .border_top.rotateAni{
+    animation:rotate 2s ease-in 0.3s infinite alternate;
+}
+
+.app > .corver > .border_left.rotateAni{
+    animation:rotate2 3s ease-in 0.5s infinite alternate;
+}
+
+@keyframes rotate{
+    0%{
+        transform: scale(1.1) rotate(0deg);
+    }
+    100%{
+        transform: scale(1.1) rotate(360deg);
+    }
+}
+
+@keyframes rotate2{
+    0%{
+        transform: scale(1.2) rotate(0deg);
+    }
+    100%{
+        transform: scale(1.2) rotate(360deg);
+    }
+}
+
+.app > .corver > .ball{
+    position: relative;
+    z-index: -1;
+}
+
+.app > .corver > .ball::before{
+    content: '';
+    width: 40px;
+    height: 40px;
+    background: #b7e6ffb4;
+    position: absolute;
+    border-radius: 50%;
+    left: 10px;top: 40px;
+    visibility: hidden;
+    margin: auto;
+    transition: all .5s ;
+    box-shadow: 0px 0px 3px #b7e6ffce;
+}
+
+.app > .corver > .ball::after{
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: #b7e6ffb4;
+    position: absolute;
+    visibility: hidden;
+    border-radius: 50%;
+    left: 10px;top: 40px;
+    margin: auto;
+    transition: all .5s ;
+    box-shadow: 0px 0px 3px #b7e6ffce;
+}
+
+.app:hover  > .corver > .ball::before{
+    visibility: visible;
+    left: -8px;
+    top: -8px;
+}
+
+.app:hover  > .corver > .ball::after{
+    visibility: visible;
+    left: 110px;
+    top: 75px;
+}
+
+.app > .corver > .scaleAni::before{
+    animation:scale 3s linear 0.5s infinite alternate;
+}
+
+.app > .corver > .scaleAni::after{
+    animation:scale2 3s linear 0.5s infinite alternate;
+}
+
+@keyframes scale{
+    0%{
+        transform:translate(0, 0);
+    }
+    100%{
+        transform:translate(5px, 8px);
+    }
+}
+
+@keyframes scale2{
+    0%{
+        transform:translate(0, 0);
+    }
+    100%{
+        transform:translate(-10px, -8px);
+    }
+}
+
+.app > .corver > .triangle{
+    position: absolute;
+    width: 0;height: 0;
+    border-width:0 10px 10px;
+    border-style:solid;
+    border-color:transparent transparent rgba(243, 220, 8, 0.781);
+    z-index: -1;
+    top: 40px;
+    left: 10px;
+    transition: 1s ;
+    visibility: hidden;
+}
+.app:hover  > .corver> .triangle{
+    visibility: visible;
+    top: 80px;
+    left: -20px;
+}
+.app > .corver > .triangle.scaleAni{
+    animation:scale 3s linear 0.5s infinite alternate;
+}
