@@ -27,14 +27,16 @@ class Switch extends Component {
                     className={styles.switch}
                     style={{
                         background:checked ? 'rgb(53, 134, 226)' : '#ccc',
-                        borderColor:checked ? 'rgb(53, 134, 226)' : '#ccc'
+                        borderColor:checked ? 'rgb(53, 134, 226)' : '#ccc',
+                        boxShadow:checked ? 'rgb(53, 134, 226) 0px 0px 10px' : 'none',
                     }}
                 ></div>
                 <div 
                     className={styles.ball}
                     style={{
                         borderColor:checked ? 'rgb(53, 134, 226)' : '#ccc',
-                        left:checked ? '15px' : '-5px'
+                        left:checked ? '15px' : '-5px',
+                        boxShadow:checked ? 'rgb(53, 134, 226) 0px 0px 10px' : 'none',
                     }}
                 ></div>
             </div>

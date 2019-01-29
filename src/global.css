@@ -181,3 +181,8 @@ a:visited, a:link,a:hover,a:active{
 .main{
 	padding-bottom: 100px;
 }
+
+.flex-app{
+  display: flex;
+  flex-wrap:wrap;
+}

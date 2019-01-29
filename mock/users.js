@@ -227,7 +227,9 @@ articles[1] = {
 }
 export default {
     'GET /articles': (req, res) => {
-        const article = req.query.offset === 0 ? articles[0] : articles[1]
+        console.log(req.query.offset);
+        
+        const article = req.query.offset == 0 ? articles[0] : articles[1]
         setTimeout(() => {
             /* res.writeHead(400, {'Content-Type': 'text/plain'});
             res.write('Error 400:resource not found');
@@ -236,6 +238,23 @@ export default {
                 code:200,
                 data:article
             })
+        },1000)
+    },
+    'GET /apps': (req, res) => {
+        setTimeout(() => {
+            /* res.writeHead(400, {'Content-Type': 'text/plain'});
+            res.write('Error 400:resource not found');
+            res.end(); */
+            res.json({
+                code:200,
+                data: [{"id":1, "corver":"http://www.zyzcss.xyz/uploads/1540387887946.jpg","name":"asd","url":"/a"}
+                ,{"id":2, "corver":"http://www.zyzcss.xyz/uploads/1540387887946.jpg","name":"asd","url":"/a"}
+                ,{"id":3, "corver":"http://www.zyzcss.xyz/uploads/1540387887946.jpg","name":"asd","url":"/a"}
+                ,{"id":4, "corver":"http://www.zyzcss.xyz/uploads/1540387887946.jpg","name":"asd","url":"/a"}
+                ,{"id":5, "corver":"http://www.zyzcss.xyz/uploads/1540387887946.jpg","name":"asd","url":"/a"}
+                ,{"id":6, "corver":"http://www.zyzcss.xyz/uploads/1540387887946.jpg","name":"asd","url":"/a"}
+                ,{"id":7, "corver":"http://www.zyzcss.xyz/uploads/1540387887946.jpg","name":"asd","url":"/a"}]
+            })//[{"id":1, "corver":"/a.png",name:"asd"},{"id":2, "corver":"/a.png",name:"asd"}]
         },1000)
     },
     'GET /article/*': (req, res) => {

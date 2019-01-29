@@ -79,11 +79,11 @@ export default async function request(opt) {
 					description: errortext,
 				});
 				console.log(`[${opt.method} ${opt.url}]请求失败，响应数据：%o`, error.response);
-				return { code: status, message: errortext };
+				return { code: status, msg: errortext };
 			});;
 		return response
 	} catch (err) {
 		console.log(err);
-		return { code: 500, message: '服务器错误' };
+		return { code: 500, msg: '服务器错误' };
 	}
 }

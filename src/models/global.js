@@ -25,6 +25,7 @@ export default {
 			animationSwitch: localAnimationSwitch === null ? true : JSON.parse(localAnimationSwitch),
 			emojiSwitch: localEmojiSwitch === null ? defaultEmojiSwitch : JSON.parse(localEmojiSwitch),
 		},
+		apps:[],
 		isLoadding: false,/* 文章加载 */
 	},
 	reducers: {
@@ -33,14 +34,6 @@ export default {
 			for (let i = 0; i < articles.length; i++) {
 				allArticles[i + offset] = articles[i];
 			}
-			/* if(limit + offset >= count){
-				//头+尾
-				allArticles = [...allArticles.slice(0, offset), ...articles]
-			}else{
-				//头+中+尾
-				allArticles = [...allArticles.slice(0, offset), ...articles, ...allArticles.slice(offset + limit)] 
-			}
-			console.log([...allArticles],articles); */
 			return {
 				...state,
 				articles,
@@ -109,6 +102,12 @@ export default {
 				...state,
 				articles
 			}
+		},
+		setApps(state, { payload:{ apps } }){
+			return{
+				...state,
+				apps,
+			}
 		}
 	},
 	effects: {
@@ -132,11 +131,13 @@ export default {
 					offset
 				},
 			});
+			
+			
 			const response = yield call(request, {
 				method: 'GET',
 				url: `/articles?limit=${limit}&offset=${offset}`,
 			});
-			
+			console.log(limit,offset,response);
 			if(response.code === 200){
 				const {articles, count} = response['data'];
 				yield put({
@@ -161,6 +162,22 @@ export default {
 					isLoadding: false
 				}
 			});
+		},
+		*getApps({ payload = {} }, { select, call, put }) {
+			const response = yield call(request, {
+				method: 'GET',
+				url: `/apps`,
+			});
+			console.log(response);
+			
+			if(response.code === 200){
+				yield put({
+					type: 'setApps',
+					payload: {
+						apps: response['data']
+					}
+				});
+			}
 		},
 		throwError() {
 			throw new Error('hi error');
