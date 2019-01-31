@@ -55,7 +55,7 @@ class ArticleContent extends Component {
             <div className={styles.container}>
                 <div className={styles.title} title={article.article_title}>{article.article_title}</div>
                 {article.article_corver ? <img className={styles.corver} src={article.article_corver} alt={article.article_title}/> : ''}
-                <div className={styles.describe}>{describe}</div>
+                <div className={styles.describe} style={{background:'#ddd',padding:'10px'}}>{describe}</div>
                 <div 
                     className={styles.describe} 
                     dangerouslySetInnerHTML={{

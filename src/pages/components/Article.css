@@ -24,6 +24,9 @@
 .container .describe{
     margin-bottom: 1.2rem;
 }
+.container .describe a{
+    color: rgb(24, 144, 255);
+}
 .container .describe p,
 .container .describe h1,
 .container .describe h2,

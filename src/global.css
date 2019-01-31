@@ -185,4 +185,5 @@ a:visited, a:link,a:hover,a:active{
 .flex-app{
   display: flex;
   flex-wrap:wrap;
+  margin-right: -40px;
 }
