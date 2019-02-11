@@ -29,7 +29,7 @@ class Tag extends Component {
     }
     search(){
         const searchText = this.state.searchText;
-        if(!searchText && searchText.trim() === ''){
+        if(!searchText || searchText.trim() === ''){
             return
         }
         const { dispatch } = this.props;
