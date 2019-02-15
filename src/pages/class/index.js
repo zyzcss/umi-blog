@@ -110,7 +110,8 @@ class Tag extends Component {
                 <Paging 
                     changePage= {(isNext) =>this.changePage(isNext)}
 					current= {current}
-					count= {count}
+                    count= {count}
+                    enabled={true}
                 />
             </React.Fragment>
         );
