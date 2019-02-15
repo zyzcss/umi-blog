@@ -54,3 +54,12 @@
 .message_box > .message_cancel{
     cursor: pointer;
 }
+.captcha{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    margin-left: 10px;
+    height: 32px;
+    cursor: pointer;
+}

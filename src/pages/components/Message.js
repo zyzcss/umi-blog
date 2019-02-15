@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Input, Checkbox, Button, Form ,Divider} from 'antd'
+import {Input, Checkbox, Button, Form ,Divider, notification} from 'antd'
 import { connect } from 'dva';
 import {getDateString, scollToTop, getUrlExceptMessage} from '../../common/tools.js'
 import request from '../../common/request.js'
@@ -30,13 +30,17 @@ class Message extends Component {
         super(props);
         this.state = {  
             messageRenderId: -1,
-            sendLoadding:false
+            sendLoadding:false,
+            captcha:'',
+            captchaSvg:'',
+            captchaStatus:'',
         }
         this.scrollToMessage = this.scrollToMessage.bind(this);
         this.getMessageDom = this.getMessageDom.bind(this);
         this.getSendMessageForm = this.getSendMessageForm.bind(this);
         this.cancelRepeat = this.cancelRepeat.bind(this);
         this.sendMessageRequest = this.sendMessageRequest.bind(this);
+        this.getCaptcha = this.getCaptcha.bind(this);
     }
     scrollToMessage(target){
         const element = document.getElementById(target);
@@ -56,6 +60,7 @@ class Message extends Component {
             })
         }
         articleURL = getUrlExceptMessage();
+        this.getCaptcha();
     }
     getMessageDom(messages, level = 0){
         const {messageRenderId} = this.state;
@@ -67,7 +72,20 @@ class Message extends Component {
                         <img className={styles.message_corver} src={message.imgUrl} alt={message.name}/>
                         <div className={styles.message_info}>
                             <div className={styles.message_name}>
-                                <span>{message.home ? <a href={message.home}>{message.name}</a>: message.name}</span>
+                                <span>
+                                    {message.home ? <a href={message.home}>{message.name}</a>: message.name} 
+                                    {message.isAudit 
+                                        ? <div 
+                                            style={{
+                                                display:'inline-block',
+                                                color:'rgb(125, 203, 223)',
+                                                fontSize:12,
+                                                paddingLeft:5
+                                            }}
+                                          >博主</div> 
+                                        : ''
+                                    }
+                                </span>
                                 <span className={styles.message_time}><a onClick={(e) => this.repeatMessage(message.id, message.name)}>回复</a> {getDateString(message.createTime)}</span>
                             </div>
                             <div className={styles.message_content} dangerouslySetInnerHTML={{__html:emojione.toImage(message.content)}}>
@@ -144,6 +162,24 @@ class Message extends Component {
                         <Input.TextArea rows={4} />
                     )}
                 </FormItem>
+                <FormItem
+                    validateStatus={this.state.captchaStatus}
+                    help={this.state.captchaStatus ? '验证码输入错误' : ''}
+                >
+                    <Input 
+                        placeholder="请输入验证码"
+                        style={{
+                            width:150
+                        }}
+                        onChange={this.changeCaptcha}
+                        value={this.state.captcha}
+                    />
+                    <span 
+                        dangerouslySetInnerHTML={{__html:this.state.captchaSvg}} 
+                        className={styles.captcha}
+                        onClick={this.getCaptcha}
+                    ></span>
+                </FormItem>
                 <FormItem>
                     {getFieldDecorator('remember', {
                         valuePropName: 'checked',
@@ -161,6 +197,12 @@ class Message extends Component {
     }
     sendMessages = (e) =>{
         e.preventDefault();
+        if(this.state.captcha.length == 0){
+            this.setState({
+                captchaStatus:'error'
+            })
+            return;
+        }
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 this.sendMessageRequest(values)
@@ -179,6 +221,7 @@ class Message extends Component {
             data:{
                 message:{
                     ...data,
+                    captcha:this.state.captcha,
                     articleid:this.props.articleId,
                     reply:messageRenderId !== -1 ? messageRenderId : null
                 }
@@ -189,11 +232,13 @@ class Message extends Component {
         })
         if(response.code === 200){
             this.setState({
-                messageRenderId:-1
+                messageRenderId:-1,
+                captcha:'',
+                captchaStatus:''
             })
             const message = response['data'];
             console.log(message);
-            
+
             if(data.remember){
                 //记住信息
                 localStorage.setItem('userInfo',JSON.stringify({
@@ -218,6 +263,15 @@ class Message extends Component {
                     message
                 }
             });
+        }else if(response.msg === 'captcha'){
+            this.setState({
+                captchaStatus:'error'
+            })
+        }else{
+            notification.error({
+                message: '发生错误',
+                description: response.msg,
+            });
         }
     }
     repeatMessage = (messageRenderId, username) =>{
@@ -237,6 +291,33 @@ class Message extends Component {
         this.setState({
             messageRenderId:-1
         })
+    }
+    changeCaptcha = (e) =>{
+        const captcha = e.target.value;
+        let captchaStatus = '';
+        if(captcha === ''){
+            captchaStatus = 'error'
+        }
+        this.setState({
+            captcha,
+            captchaStatus
+        })
+    }
+    async getCaptcha(){
+        const response = await request({
+            method: 'GET',
+            url: '/captcha',
+        });
+        if(response.code == 200){
+            this.setState({
+                captchaSvg:response.data,
+                captchaStatus:''
+            })
+        }else{
+            this.setState({
+                captcha:'',
+            })
+        }
     }
     render() { 
         const messages = this.props.messages;
