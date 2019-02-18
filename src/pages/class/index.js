@@ -49,12 +49,12 @@ class Tag extends Component {
             }
 		});
     }
-    changePage = (isNext) =>{
+    changePage = (page) =>{
         const { dispatch } = this.props;
 		dispatch({
 			type: 'class/changPage',
 			payload:{
-				isNext
+				page
 			}
 		});
 		window.scrollTo(0,200);
@@ -108,7 +108,7 @@ class Tag extends Component {
                 </div>
                 {articles}
                 <Paging 
-                    changePage= {(isNext) =>this.changePage(isNext)}
+                    changePage= {this.changePage}
 					current= {current}
                     count= {count}
                     enabled={true}

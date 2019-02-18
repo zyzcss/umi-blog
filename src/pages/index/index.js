@@ -23,12 +23,12 @@ class App extends Component {
 			animation.showScrollAnimation();
 		}
 	}
-	changePage = (isNext) =>{
+	changePage = (page) =>{
 		const { dispatch } = this.props;
 		dispatch({
 			type: 'index/changPage',
 			payload:{
-				isNext:isNext
+				page
 			}
 		});
 		window.scrollTo(0,0);
@@ -51,7 +51,7 @@ class App extends Component {
 				</div>	
 				{Articles}
 				<Paging 
-					changePage= {(isNext) =>this.changePage(isNext)}
+					changePage= {this.changePage}
 					current= {current}
 					count= {count}
 					enabled= {!isLoadding}

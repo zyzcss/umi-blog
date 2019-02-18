@@ -9,17 +9,10 @@ export default {
 		count:0,
 	},
 	reducers: {
-		changPageReducer(state, { payload:{ isNext } }) {
+		changPageReducer(state, { payload:{ page } }) {
 			let {limit, offset, current} = state;
-			if(isNext === 1){
-				//下一页
-				current ++ ;
-				offset += limit;
-			}else{
-				//上一页
-				current --;
-				offset -= limit;
-			}
+			current = page - 1;
+			offset = limit*current;
 			offset = Math.max(offset, 0);
 			current = Math.max(current, 0);
 			return {
@@ -37,11 +30,11 @@ export default {
 	},
 	effects: {
 		*changPage({ payload }, { select, call, put }) {
-			const isNext = payload.isNext;
+			const page = payload.page;
 			yield put({
 				type:'changPageReducer',
 				payload:{
-					isNext
+					page
 				}
 			})
 			const state = yield select(state => state.index);

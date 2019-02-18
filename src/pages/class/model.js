@@ -40,15 +40,9 @@ export default {
 				searchEnd
 			}
 		},
-		changPage(state, { payload: {isNext}}){
+		changPage(state, { payload: {page}}){
 			let current = state.current;
-			if(isNext === 1){
-				current++;
-				current = Math.min(current, state.count);
-			}else{
-				current--;
-				current = Math.max(current, 0);
-			}
+			current = page - 1;
 			const start = current * limit;
 			console.log('当前页数',current);
 			
