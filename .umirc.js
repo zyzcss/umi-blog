@@ -15,11 +15,11 @@ export default {
           /components/,
         ],
       },
-      pwa:{
+      /* pwa:{
         workboxOptions: {
           importWorkboxFrom: 'local',
         }
-      }
+      } */
     }],
   ],
   history: 'hash',
