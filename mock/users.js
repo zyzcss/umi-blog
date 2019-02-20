@@ -4,7 +4,7 @@ articles[0] = {articles:[{
     "id": 6,
     "article_title": "666",
     "article_describe": "66",
-    "article_corver": null,
+    "article_corver": "http://www.zyzcss.xyz/uploads/screen/parcel.png",
     "article_date": "2018-12-14T08:40:51.000Z",
     "article_content": "666",
     "article_click": 0,
@@ -17,7 +17,7 @@ articles[0] = {articles:[{
     "id": 5,
     "article_title": "mysql",
     "article_describe": "mysql",
-    "article_corver": "mysql",
+    "article_corver": "https://www.zyzcss.xyz/uploads/face.png",
     "article_date": "2018-12-14T08:40:27.000Z",
     "article_content": "mysql",
     "article_click": 0,
@@ -318,7 +318,7 @@ export default {
     },
     'GET /article/*': (req, res) => {
         setTimeout(() => {
-            res.json({code:200,data:{"id":4,"article_title":"wlp dswlp","article_describe":"测试","article_corver":"uploads/1540387887946.jpg","article_date":"2018-10-24T13:33:03.000Z","article_content":"<p>😀😱😉😋<img src=\"uploads/1540387887946.jpg\" style=\"max-width: 100%;\"><br></p>","article_click":19,"article_type":0,
+            res.json({code:200,data:{"id":4,"article_title":"wlp dswlp","article_describe":"测试","article_corver":"http://www.zyzcss.xyz/uploads/screen/parcel.png","article_date":"2018-10-24T13:33:03.000Z","article_content":"<p>😀😱😉😋<img src=\"uploads/1540387887946.jpg\" style=\"max-width: 100%;\"><br></p>","article_click":19,"article_type":0,
             "article_tags":[{"id":7,"articleid":4,"tagid":1,"tag":{"id":1,"name":"node"}}],
             "messages":[
                 {"id":1,"name":"1","home":"www.zyzcss.xyz","articleid":4,"imgUrl":null,"content":"asddassad","reply":null,"type":0,"isAudit":0,"createTime":"2018-10-26T05:48:22.000Z",

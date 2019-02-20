@@ -5,6 +5,10 @@
     margin-bottom: 50px;
     padding: 10px 35px;
 }
+.article_home{
+	position: relative;
+	padding-right: 20%;
+}
 .container a{
     color: black;
 }
@@ -20,6 +24,21 @@
     margin: 0 auto;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
     margin-bottom: 1.2rem;
+}
+.container .corver_home{
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	right: 20px;
+	width: auto;
+    max-height: calc(100% - 60px);
+}
+.container .corver_content{
+	width: auto;
+	max-width: 100%;
+	margin-left: 0;
 }
 .container .describe{
     margin-bottom: 1.2rem;
@@ -102,3 +121,13 @@
     vertical-align: -2px;
 }
 
+@media screen and (max-width: 576px) {
+    .article_home{
+		position: relative;
+		padding-right: 35px;
+	}
+	.container .corver_home{
+		position: static;
+		width: 100%;
+	}
+}

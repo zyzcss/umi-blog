@@ -17,11 +17,12 @@ class Article extends Component {
                         : article.article_content.slice(0,50) + '...' ;
         return (  
             <div 
-            className={setting.animationSwitch ? styles.container + " index-article" : styles.container + " index-article index-article-show"} 
+            className={setting.animationSwitch ? styles.container + " index-article " + styles.article_home : styles.container + " index-article index-article-show "  + styles.article_home} 
+            
             >
                 <Link to={`article?id=${article.id}`}><div className={styles.title} title={article.article_title}>{article.article_title}</div></Link>
                 {article.article_corver ?
-                <Link to={`article?id=${article.id}`}><img className={styles.corver} src={article.article_corver} alt={article.article_title}/></Link>
+                <Link to={`article?id=${article.id}`}><img className={styles.corver + ' ' + styles.corver_home} src={article.article_corver} alt={article.article_title}/></Link>
                 : ''}
                 <Link to={`article?id=${article.id}`}><div className={styles.describe}>{describe}</div></Link>
                 <div className={styles.icons}>
