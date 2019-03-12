@@ -21,10 +21,17 @@ class Article extends Component {
             
             >
                 <Link to={`article?id=${article.id}`}><div className={styles.title} title={article.article_title}>{article.article_title}</div></Link>
-                {article.article_corver ?
-                <Link to={`article?id=${article.id}`}><img className={styles.corver + ' ' + styles.corver_home} src={article.article_corver} alt={article.article_title}/></Link>
-                : ''}
-                <Link to={`article?id=${article.id}`}><div className={styles.describe}>{describe}</div></Link>
+                {article.article_corver ?   
+                    <Link to={`article?id=${article.id}`}>
+                        <img 
+                            className={styles.corver + ' ' + styles.corver_home} 
+                            src={article.article_corver} 
+                            title={article.article_title} 
+                            alt={article.article_title}
+                        />
+                    </Link>: 
+                    ''}
+                <Link to={`article?id=${article.id}`}><div className={styles.describe} title={styles.describe}>{describe}</div></Link>
                 <div className={styles.icons}>
                     <ArticleInformation article={article} isLink={true}/>
                     <Tag article_tags={article.article_tags}/>

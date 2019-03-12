@@ -100,7 +100,8 @@ export default {
 			}
 			return {
 				...state,
-				articles
+				articles,
+				isLoadding: articles.length > 0 ? false : true
 			}
 		},
 		setApps(state, { payload:{ apps } }){
@@ -137,7 +138,6 @@ export default {
 				method: 'GET',
 				url: `/articles?limit=${limit}&offset=${offset}`,
 			});
-			console.log(limit,offset,response);
 			if(response.code === 200){
 				const {articles, count} = response['data'];
 				yield put({

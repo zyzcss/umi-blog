@@ -34,18 +34,22 @@ class Tag extends Component {
         }
         const { dispatch } = this.props;
 		dispatch({
-            type: 'class/getSearchByText',
+            type: 'class/searchStateChange',
             payload:{
-                searchText
+                searchText,
+                clear: true,
+                type:'getSearchByText'
             }
         });
     }
     searchTag (id){
         const { dispatch } = this.props;
 		dispatch({
-            type: 'class/getSearch',
+            type: 'class/searchStateChange',
             payload:{
-                id
+                id,
+                clear: true,
+                type:'getSearch'
             }
 		});
     }
