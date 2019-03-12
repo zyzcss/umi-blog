@@ -41,6 +41,7 @@ class Tag extends Component {
                 type:'getSearchByText'
             }
         });
+        this.pagingRef.resetInput('1');
     }
     searchTag (id){
         const { dispatch } = this.props;
@@ -51,7 +52,8 @@ class Tag extends Component {
                 clear: true,
                 type:'getSearch'
             }
-		});
+        });
+        this.pagingRef.resetInput('1');
     }
     changePage = (page) =>{
         const { dispatch } = this.props;
@@ -61,7 +63,10 @@ class Tag extends Component {
 				page
 			}
 		});
-		window.scrollTo(0,0);
+        window.scrollTo(0,0);
+    }
+    setRefs = (ref) =>{
+        this.pagingRef = ref;
     }
     componentDidUpdate(preProp){
 		if(preProp.searchList !== this.props.searchList && this.props.searchList.length > 0){
@@ -116,6 +121,7 @@ class Tag extends Component {
 					current= {current}
                     count= {count}
                     enabled={true}
+                    ref={this.setRefs}
                 />
             </React.Fragment>
         );

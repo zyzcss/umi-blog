@@ -55,12 +55,10 @@ class Paging extends Component {
             this.buttonClick(e, inputPage);
         }
     }
-    componentDidUpdate(preProps, preState){
-        if(preProps.current == 0 && preState.inputPage != '1'){
-            this.setState({
-                inputPage:'1'
-            })
-        }
+    resetInput = (inputPage)=>{
+        this.setState({
+            inputPage
+        })
     }
     render() { 
         const {current = 0, count = 0, enabled} = this.props;
