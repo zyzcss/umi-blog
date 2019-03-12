@@ -55,6 +55,13 @@ class Paging extends Component {
             this.buttonClick(e, inputPage);
         }
     }
+    componentDidUpdate(preProps, preState){
+        if(preProps.current == 0 && preState.inputPage != '1'){
+            this.setState({
+                inputPage:'1'
+            })
+        }
+    }
     render() { 
         const {current = 0, count = 0, enabled} = this.props;
         const cursor = enabled ? 'pointer' : 'wait';

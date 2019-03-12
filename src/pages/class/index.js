@@ -61,7 +61,7 @@ class Tag extends Component {
 				page
 			}
 		});
-		window.scrollTo(0,200);
+		window.scrollTo(0,0);
     }
     componentDidUpdate(preProp){
 		if(preProp.searchList !== this.props.searchList && this.props.searchList.length > 0){
@@ -71,7 +71,7 @@ class Tag extends Component {
     render() { 
         const {searchFail} = this.state;
         const {searchList, searchLoadding, tags, minCount, sumCount, current, count, searchEnd} = this.props;
-        const articles = searchList.map((article,index)=> <Article article={article} key={index}/>)
+        const articles = searchList.map((article,index)=> <Article article={article} key={article.id}/>)
         const tagsWord = tags.map((tag) => {
             const multiple = (tag['count'] - minCount)/sumCount;
             return(<span key={tag['id']} 

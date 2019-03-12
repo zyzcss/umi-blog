@@ -42,9 +42,15 @@ export default {
 			}
 		},
 		setSearchEnd(state, { payload: {searchEnd } }){
+			const type = {
+				searchEnd
+			}
+			if(searchEnd){
+				type.searchLoadding = false;
+			}
 			return {
 				...state,
-				searchEnd
+				...type
 			}
 		},
 		clearSearchData(state){
@@ -55,6 +61,7 @@ export default {
 				count: 0,
 				offset: 0,
 				current: 0,
+				searchLoadding: true
 			}
 		},
 		setPage(state, {payload: {page, offset}}){
@@ -85,7 +92,7 @@ export default {
 			const {offset = 0} = state;
 			//记录信息
 			_id = payload.id;
-			if(!payload.clear){
+			if(payload.clear){
 				searchType = 'getSearch';
 			}
 			//发出请求
@@ -131,7 +138,7 @@ export default {
 			const state = yield select(state => state.class);
 			const {offset = 0} = state;
 			_searchText = payload.searchText;
-			if(!payload.clear){
+			if(payload.clear){
 				searchType = 'getSearchByText';
 			}
 			//发出请求
@@ -176,20 +183,12 @@ export default {
 			}
 		},
 		*searchStateChange({payload}, {put}){
-			//加载开始
-			yield put({
-				type: 'search',
-				payload: {
-					searchLoadding:true
-				}
-			});
 			//清空和调用缓存
 			if(payload.clear){
 				yield put({
 					type: 'clearSearchData',
 				});
 			}else{
-				searchType = 'getSearch';
 				yield put({
 					type: 'setHasSearchData',
 				})
@@ -202,7 +201,7 @@ export default {
 				}
 			})
 			yield put({
-				type: searchType,
+				type: payload.type ? payload.type : searchType,
 				payload
 			})
 		},
